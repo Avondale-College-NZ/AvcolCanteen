@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using AvcolCanteen.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("AvcolCanteenContextConnection") ?? throw new InvalidOperationException("Connection string 'AvcolCanteenContextConnection' not found.");
+
+builder.Services.AddDbContext<AvcolCanteenContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<AvcolCanteenUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AvcolCanteenContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
