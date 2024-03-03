@@ -12,6 +12,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="~/images/AvCol Logo single.png" alt="Avcol Logo" class="logo" />
+                </a>
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AvcolCanteen</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +34,7 @@
                         <button class="btn btn-primary" type="button">Search</button>
                     </form>
                 </div>
+                <partial name="_LoginPartial"/>
             </div>
         </nav>
     </header>
