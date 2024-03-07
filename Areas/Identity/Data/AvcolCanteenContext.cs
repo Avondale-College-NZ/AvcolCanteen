@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AvcolCanteen.Models;
 
 namespace AvcolCanteen.Areas.Identity.Data;
 
@@ -19,4 +20,8 @@ public class AvcolCanteenContext : IdentityDbContext<AvcolCanteenUser>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
     }
+
+    public DbSet<AvcolCanteen.Models.Categories> Categories { get; set; } = default!;
+
+    public DbSet<AvcolCanteen.Models.Menu> Menu { get; set; } = default!;
 }
