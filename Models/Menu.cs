@@ -10,5 +10,8 @@ namespace AvcolCanteen.Models
         public decimal MenuPrice { get; set; }
         [ForeignKey("CategoryID")]
         public Categories Categories { get; set; }
+        public int MenuStock { get; set; }
+        public bool MenuSpecial { get; set; }
+
     }
 }
