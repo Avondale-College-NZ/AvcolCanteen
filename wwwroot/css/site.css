@@ -17,15 +17,16 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
+/*body {
+    margin-bottom: 60px;
+}*/
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
     margin: auto;
     text-align: center;
     font-family: arial;
+    font-size:16px;
 }
 
 .price {
@@ -33,32 +34,24 @@ body {
     font-size: 22px;
 }
 
-.card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
+.card p {
+    font-size: 14px;
 }
 
-    .card button:hover {
-        opacity: 0.7;
-    }
 .grid-container {
     display: grid;
-    grid-template-columns: 200px 250px 300px 150px;
-    gap: 10px;
-    padding: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 20px;
 }
 
     .grid-container > div {
         background-color: rgba(255, 255, 255, 0.8);
         text-align: center;
         padding: 20px 0;
-        font-size: 30px;
-       max-width: 200px;
+        font-size: 16px;
+    }
+.head {
+    text-align: center;
+    padding:20px;
 }
