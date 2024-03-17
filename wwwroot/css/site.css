@@ -17,12 +17,12 @@ html {
   min-height: 100%;
 }
 
-/*body {
+body {
     margin-bottom: 60px;
-}*/
+}
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
+    max-width: 275px;
     margin: auto;
     text-align: center;
     font-family: arial;
@@ -39,19 +39,20 @@ html {
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
-    padding: 20px;
+    display: flex;
+    gap: 40px;
+    /*    padding: 20px;
+*/ flex-wrap: wrap;
+    justify-content: center; /* Horizontally center the content */
+    /*align-items: center;*/ /* Vertically center the content */
 }
 
     .grid-container > div {
         background-color: rgba(255, 255, 255, 0.8);
         text-align: center;
-        padding: 20px 0;
         font-size: 16px;
     }
-.head {
+.heading {
     text-align: center;
     padding:20px;
 }
