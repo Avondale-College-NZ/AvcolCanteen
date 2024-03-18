@@ -56,6 +56,28 @@ body {
     text-align: center;
     padding:20px;
 }
-menuimg{
-    width:100px;
+.containerHome {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 0px 20px;
+    grid-auto-flow: row;
+    align-items: center;
+}
+.MenuButton {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.Search {
+    grid-area: 1 / 2 / 2 / 3;
+    text-align:center;
+}
+
+.SearchFunction {
+    grid-area: 1 / 3 / 2 / 4;
+}
+.menubuttoncss {
+    width: 400px;
+    margin-left: 12px;
+    padding-top: 40px;
 }

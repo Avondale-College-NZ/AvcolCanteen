@@ -1,11 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<script>
-    var baseUrl = '@Url.Action("MenuPage", "Home")';
-</script>
-<script src="ToMenuPage.js"></script>
-
 
 <div class="container text-center">
     <style>
@@ -44,7 +39,7 @@
         </button>
     </div>
 
-    <div class="container-fluid mt-3">
+@*     <div class="container-fluid mt-3">
         <h3>Welcome to Avcol Canteen</h3>
         <p>Search our Menu or search.</p>
         <form class="d-flex">
@@ -53,13 +48,29 @@
         </form>
         <a href="@Url.Action("MenuPage", "Home")">
         <img src="~/Images/menu.jpg">
-@*         <style>
+        <style>
 
             img:hover {
                 cursor: pointer;
             }
 
-        </style> *@
+        </style>
+    </div> *@
+</div>
+<div class="containerHome">
+    <div class="MenuButton">
+        <a href="@Url.Action("MenuPage", "Home")">
+            <img class="menubuttoncss" src="~/Images/menu.jpg">
+        </a>
+    </div>
+    <div class="Search">
+            <h2 style="font-size:30px">View our Menu or search</h2>
+        </div>
+        <div class="SearchFunction"> 
+        <form class="d-flex">
+            <input class="form-control me-2" type="text" placeholder="Search">
+            <button class="btn btn-primary" type="button">Search</button>
+        </form>
+        </div>
     </div>
 </div>
-
