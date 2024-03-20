@@ -41,10 +41,9 @@ body {
 .grid-container {
     display: flex;
     gap: 40px;
-    /*    padding: 20px;
-*/ flex-wrap: wrap;
-    justify-content: center; /* Horizontally center the content */
-    /*align-items: center;*/ /* Vertically center the content */
+    flex-wrap: wrap;
+    justify-content: center;
+
 }
 
     .grid-container > div {
@@ -86,11 +85,26 @@ body {
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
     border: 0px solid #000000;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow to the transition */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
     .menubuttoncss:hover {
-        transform: scale(1.05); /* Increase the size of the image by 10% */
+        transform: scale(1.05);
         -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
         box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+.glow {
+    display: inline-block;
+    transition-duration: 0.3s;
+    transition-property: box-shadow;
+    width: 400px;
+    margin-left: 12px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+    .glow:hover {
+        box-shadow: 0 0 12px 5px rgba(0, 0, 0, 0.6);
     }
