@@ -95,8 +95,7 @@ body {
     }
 .glow {
     display: inline-block;
-    transition-duration: 0.3s;
-    transition-property: box-shadow;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     width: 400px;
     margin-left: 12px;
     border-radius: 10px 10px 10px 10px;
@@ -108,5 +107,40 @@ body {
     .glow:hover {
         box-shadow: 0 0 12px 5px rgba(0, 0, 0, 0.6);
         transform: scale(1.05);
-        transition: transform 0.3s ease-in-out;
     }
+.LogRegButton {
+    color: #107ac7;
+    text-decoration: none;
+}
+.Regbutton {
+    display: block;
+    width: 100%;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    color: #107ac7;
+}
+.Regbutton:hover{
+    color: #1e2125;
+    background-color: #e9ecef;
+}
+  /*  .Regbutton.active {
+        color: #fff;
+        text-decoration: none;
+        background-color: #0d6efd;
+    }
+.Regbutton.disabled{
+    color: #adb5bd;
+    pointer-events: none;
+    background-color: transparent;
+}
+.Regbutton.text {
+    display: block;
+    padding: 0.25rem 1rem;
+    color: #212529;
+}*/
