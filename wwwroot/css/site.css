@@ -108,11 +108,8 @@ body {
         box-shadow: 0 0 12px 5px rgba(0, 0, 0, 0.6);
         transform: scale(1.05);
     }
+
 .LogRegButton {
-    color: #107ac7;
-    text-decoration: none;
-}
-.Regbutton {
     display: block;
     width: 100%;
     clear: both;
@@ -125,22 +122,10 @@ body {
     border: 0;
     color: #107ac7;
 }
-.Regbutton:hover{
-    color: #1e2125;
-    background-color: #e9ecef;
-}
-  /*  .Regbutton.active {
-        color: #fff;
-        text-decoration: none;
-        background-color: #0d6efd;
+    .LogRegButton:hover {
+        color: #1e2125;
+        background-color: #e9ecef;
     }
-.Regbutton.disabled{
-    color: #adb5bd;
-    pointer-events: none;
-    background-color: transparent;
-}
-.Regbutton.text {
-    display: block;
-    padding: 0.25rem 1rem;
-    color: #212529;
+/*.dropdown-menulogin{
+    margin-left: 1340px;
 }*/
