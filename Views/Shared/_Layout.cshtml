@@ -35,6 +35,12 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MenuPage">Menu</a>
                         </li>
                     </ul>
+                    <div>
+                        <div class="searchcontainer">
+                            <input type="text" placeholder="Search...">
+                            <div class="search"></div>
+                        </div>
+                    </div> 
                     <div
                     class="nav-item dropdown" style="margin-right:50px">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,13 +53,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href=" @Url.Action("Privacy", "Home" )">Privacy</a>
                         </div>
-                    </div>
-                    <div style="max-hieght:20px;">
-                    <div class="searchcontainer">
-                        <input type="text" placeholder="Search...">
-                        <div class="search"></div>
-                    </div>
-                    </div>
+                    </div>   
             </div>
         </nav>
     </header>

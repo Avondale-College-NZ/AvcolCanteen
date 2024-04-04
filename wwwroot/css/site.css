@@ -144,8 +144,8 @@ body {
         background: linear-gradient(to top, #468CCF, #63B8EE);
     }*/
 .searchcontainer {
-    position: absolute;
-    margin:auto;
+    position: relative;
+    margin-right:200px;
     top: 0;
     left: 0;
     right: 0;
