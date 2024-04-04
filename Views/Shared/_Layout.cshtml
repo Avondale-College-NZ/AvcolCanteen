@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AvcolCanteen.styles.css" asp-append-version="true" />
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Scribble&display=swap" rel="stylesheet"/>
 </head>
 <body>
     <header>
@@ -50,6 +47,12 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href=" @Url.Action("Privacy", "Home" )">Privacy</a>
                         </div>
+                    </div>
+                    <div style="max-hieght:20px;">
+                    <div class="searchcontainer">
+                        <input type="text" placeholder="Search...">
+                        <div class="search"></div>
+                    </div>
                     </div>
             </div>
         </nav>
