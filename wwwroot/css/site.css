@@ -126,27 +126,9 @@ body {
         color: #1e2125;
         background-color: #e9ecef;
     }
-/*.testbutton {
-    font-family: arial;
-    color: #14396A !important;
-    font-size: 15px;
-    text-shadow: 1px 1px 0px #7CACDE;
-    box-shadow: 1px 1px 1px #BEE2F9;
-    padding: 10px 25px;
-    border-radius: 10px;
-    border: 2px solid #3866A3;
-    background: #EEEEEE;
-}
-
-    .testbutton:hover {
-        color: #14396A !important;
-        background: #468CCF;
-        background: linear-gradient(to top, #468CCF, #63B8EE);
-    }*/
-.searchcontainer {
+/*.searchcontainer {
     position: relative;
-    /*    margin-right: 200px;
-*/ top: 0px;
+    top: 0px;
     left: 50px;
     right: 0;
     bottom: 0;
@@ -163,7 +145,7 @@ body {
     left: 0;
     width: 80px;
     height: 80px;
-    background: crimson; /* Change background color to green */
+    background: crimson;
     border-radius: 50%;
     transition: all 1s;
     z-index: 4;
@@ -204,7 +186,7 @@ body {
     transition: all .5s;
 }
 
-input {
+inputsearch {
     font-family: 'Inconsolata', monospace;
     position: absolute;
     margin: auto;
@@ -216,9 +198,9 @@ input {
     height: 50px;
     outline: none;
     border: none;
-    background: crimson; /* Change background color to green */
+    background: crimson;
     color: white;
-    text-shadow: 0 0 10px crimson; /* Change text shadow color to green */
+    text-shadow: 0 0 10px crimson;
     padding: 0 80px 0 20px;
     border-radius: 30px;
     box-shadow: 0 0 25px 0 crimson, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
@@ -229,24 +211,25 @@ input {
     letter-spacing: 0.1em;
 }
 
-input:hover {
+inputsearch:hover {
     cursor: pointer;
 }
 
-input:focus {
-    width: 300px;
-    opacity: 1;
-    cursor: text;
-}
+    inputsearch:focus {
+        width: 300px;
+        opacity: 1;
+        cursor: text;
+    }
 
-input:focus ~ .search {
-    right: -250px;
-    background: #151515;
-    z-index: 6;
-}
+        inputsearch:focus ~ .search {
+            right: -250px;
+            background: #151515;
+            z-index: 6;
+        }
 
-input::placeholder {
-    color: white;
-    opacity: 0.5;
-    font-weight: bolder;
-}
+    inputsearch::placeholder {
+        color: white;
+        opacity: 0.5;
+        font-weight: bolder;
+    }
+*/
