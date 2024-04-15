@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using AvcolCanteen.Areas.Identity.Data
+
+@inject SignInManager<AvcolCanteenUser> SignInManager
+@inject UserManager<AvcolCanteenUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,16 +31,18 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MenuPage">Menu</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MenuPage">Menu</a>
-                        </li>
                     </ul>
-                    </div>  
+                    </div>
+                    <div style="color:white; margin-right:20px">
+                     @if (SignInManager.IsSignedIn(User)) {
+                        <p1>Hello @UserManager.GetUserName(User) </p1>
+                     }
+                    </div>
                     <div class="nav-item dropdown" style="margin-right:50px">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="~/Images/profilepic.png" alt="ProfilePic" style="width:50px;">
@@ -43,7 +50,7 @@
                         <div class="dropdown-menu" style="max-width:100%; text-align:center; " aria-labelledby="navbarDropdown">
                             <a <partial name="_LoginPartial" /></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("Contact", "Home" )">Contact</a>
+                            <a class="dropdown-item" href=" #">Orders</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href=" @Url.Action("Privacy", "Home" )">Privacy</a>
                         </div>

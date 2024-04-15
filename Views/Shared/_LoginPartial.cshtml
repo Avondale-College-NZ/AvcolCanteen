@@ -8,13 +8,14 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="LogRegButton">
-            <a id="manage" class="nav-link" style="color: #107ac7; word-wrap: break-word " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            <a id="manage" class="nav-link" style="color: #107ac7; word-wrap: break-word " asp-area="Identity" asp-page="/Account/Manage/Index">Account</a>
         </li>
-        <li class="nav-item">
+        <li class="LogRegButton">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-light border-0">Logout</button>
+                <a id="logout" href="javascript:void(0)" onclick="document.getElementById('logoutForm').submit()" style="color: #107ac7" class="nav-link">Logout</a>
             </form>
         </li>
+
     }
     else
     {
