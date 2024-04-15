@@ -126,7 +126,7 @@ body {
         color: #1e2125;
         background-color: #e9ecef;
     }
-/*.searchcontainer {
+.searchcontainer {
     position: relative;
     top: 0px;
     left: 50px;
@@ -186,7 +186,7 @@ body {
     transition: all .5s;
 }
 
-inputsearch {
+input[type='search'] {
     font-family: 'Inconsolata', monospace;
     position: absolute;
     margin: auto;
@@ -211,25 +211,24 @@ inputsearch {
     letter-spacing: 0.1em;
 }
 
-inputsearch:hover {
-    cursor: pointer;
+input[type='search']:hover {
+        cursor: pointer;
 }
 
-    inputsearch:focus {
+input[type='search']:focus {
         width: 300px;
         opacity: 1;
         cursor: text;
-    }
+}
 
-        inputsearch:focus ~ .search {
-            right: -250px;
-            background: #151515;
-            z-index: 6;
-        }
+input[type='search']:focus ~ .search {
+        right: -250px;
+        background: #151515;
+        z-index: 6;
+}
 
-    inputsearch::placeholder {
+input[type='search']::placeholder {
         color: white;
         opacity: 0.5;
         font-weight: bolder;
-    }
-*/
+}
