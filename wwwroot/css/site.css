@@ -232,3 +232,36 @@ input[type='search']::placeholder {
         opacity: 0.5;
         font-weight: bolder;
 }
+/* Style for the navbar buttons */
+.nav-link-custom {
+    color: white; /* Text color */
+    transition: color 0.3s, background-color 0.3s, transform 0.3s; /* Smooth transitions for color, background color, and scale effect */
+    padding: 8px 12px; /* Adjust padding to fit your design */
+    border-radius: 4px; /* Rounded corners */
+}
+
+    /* Style for the active navbar button */
+    .nav-link-custom.active {
+        background-color: crimson; /* Custom background color for active button */
+        color: #ffffff; /* Custom text color for active button */
+    }
+
+    /* Hover state style for the navbar buttons */
+    .nav-link-custom:hover {
+        background-color: steelblue; /* Change background color on hover */
+        color: #ffffff; /* Change text color on hover */
+        transform: scale(1.05); /* Scale effect on hover */
+    }
+
+/* Additional styling for the dropdown */
+.dropdown-menu {
+    background-color: #ff6b6b; /* Background color for dropdown menu */
+    color: white; /* Text color */
+    transition: opacity 0.3s; /* Smooth transition for opacity */
+    opacity: 0; /* Initially hide the dropdown */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    opacity: 1; /* Show the dropdown */
+}
