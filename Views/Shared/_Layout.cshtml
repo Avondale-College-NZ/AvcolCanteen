@@ -27,16 +27,14 @@
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <!-- Example for the "Home" button -->
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-custom @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item" style="margin-left:5px;">
+                            <a class="nav-link material-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MenuPage">Menu</a>
+                        <li class="nav-item" style="margin-left:5px;">
+                            <a class="nav-link material-item @(ViewContext.RouteData.Values["Action"].ToString() == "menupage" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="MenuPage">Menu</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        <li class="nav-item" style="margin-left:5px;">
+                            <a class="nav-link material-item @(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                     </ul>
                     </div>
