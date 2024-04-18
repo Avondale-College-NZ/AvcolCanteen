@@ -251,4 +251,3 @@ input[type='search']::placeholder {
     .material-item.active::after {
         width: 100%;
     }
-
