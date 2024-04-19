@@ -26,12 +26,16 @@ namespace AvcolCanteen.Controllers
         {
             return View();
         }
-        public IActionResult menupage()
+        public IActionResult Menupage()
         {
             return View();
         }
+		public IActionResult Menu2()
+		{
+			return View();
+		}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
