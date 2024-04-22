@@ -282,6 +282,7 @@ input[type='search']::placeholder {
     flex-wrap: wrap;
     align-content: center;
     justify-items: center;
+    transition: transform 0.5s ease-in-out;
 }
 
 .product {
@@ -403,7 +404,7 @@ header .shopping {
 
 
 .active .all-products {
-    transform: translateX(-200px);
+    transform: translateX(-175px);
 }
 .active .card {
     left: calc(100% - 275px);
