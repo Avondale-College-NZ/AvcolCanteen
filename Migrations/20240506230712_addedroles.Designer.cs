@@ -4,6 +4,7 @@ using AvcolCanteen.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AvcolCanteen.Migrations
 {
     [DbContext(typeof(AvcolCanteenContext))]
-    partial class AvcolCanteenContextModelSnapshot : ModelSnapshot
+    [Migration("20240506230712_addedroles")]
+    partial class addedroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +112,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Products", b =>
@@ -147,7 +150,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -290,7 +293,7 @@ namespace AvcolCanteen.Migrations
             modelBuilder.Entity("AvcolCanteen.Models.Products", b =>
                 {
                     b.HasOne("AvcolCanteen.Models.Categories", "Categories")
-                        .WithMany("Products")
+                        .WithMany("Menu")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -351,7 +354,7 @@ namespace AvcolCanteen.Migrations
 
             modelBuilder.Entity("AvcolCanteen.Models.Categories", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Menu");
                 });
 #pragma warning restore 612, 618
         }

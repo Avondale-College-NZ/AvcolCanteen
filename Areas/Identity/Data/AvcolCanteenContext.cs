@@ -23,5 +23,6 @@ public class AvcolCanteenContext : IdentityDbContext<AvcolCanteenUser>
 
     public DbSet<AvcolCanteen.Models.Categories> Categories { get; set; } = default!;
 
-    public DbSet<AvcolCanteen.Models.Menu> Menu { get; set; } = default!;
+    public DbSet<AvcolCanteen.Models.Products> Products { get; set; } = default!;
+
 }

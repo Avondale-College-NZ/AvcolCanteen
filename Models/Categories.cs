@@ -7,6 +7,6 @@ namespace AvcolCanteen.Models
         [Key]
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
-        public ICollection<Menu> Menu { get; set; } = new List<Menu>();
+        public ICollection<Products> Products { get; set; } = new List<Products>();  
     }
 }
