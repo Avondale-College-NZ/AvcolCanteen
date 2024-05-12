@@ -59,6 +59,8 @@ namespace AvcolCanteen.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
         }
 
         private async Task LoadAsync(AvcolCanteenUser user)
