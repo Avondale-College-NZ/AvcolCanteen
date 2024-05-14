@@ -25,4 +25,10 @@ public class AvcolCanteenContext : IdentityDbContext<AvcolCanteenUser>
 
     public DbSet<AvcolCanteen.Models.Products> Products { get; set; } = default!;
 
+    public DbSet<AvcolCanteen.Models.Cart> Cart { get; set; } = default!;
+
+    public DbSet<AvcolCanteen.Models.Orders> Orders { get; set; } = default!;
+
+    public DbSet<AvcolCanteen.Models.Payment> Payment { get; set; } = default!;
+
 }

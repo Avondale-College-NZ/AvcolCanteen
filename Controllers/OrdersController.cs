@@ -10,87 +10,90 @@ using AvcolCanteen.Models;
 
 namespace AvcolCanteen.Controllers
 {
-    public class CategoriesController : Controller
+    public class OrdersController : Controller
     {
         private readonly AvcolCanteenContext _context;
 
-        public CategoriesController(AvcolCanteenContext context)
+        public OrdersController(AvcolCanteenContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'AvcolCanteenContext.Categories'  is null.");
+            var avcolCanteenContext = _context.Orders.Include(o => o.AvcolCanteenUser);
+            return View(await avcolCanteenContext.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
-            var categories = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (categories == null)
+            var orders = await _context.Orders
+                .Include(o => o.AvcolCanteenUser)
+                .FirstOrDefaultAsync(m => m.OrderID == id);
+            if (orders == null)
             {
                 return NotFound();
             }
 
-            return View(categories);
+            return View(orders);
         }
 
-        // GET: Categories/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryID,Name")] Categories categories)
+        public async Task<IActionResult> Create([Bind("OrderID,AvcolCanteenUserID,TotalPrice")] Orders orders)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categories);
+                _context.Add(orders);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categories);
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id", orders.AvcolCanteenUserID);
+            return View(orders);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
-            var categories = await _context.Categories.FindAsync(id);
-            if (categories == null)
+            var orders = await _context.Orders.FindAsync(id);
+            if (orders == null)
             {
                 return NotFound();
             }
-            return View(categories);
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id", orders.AvcolCanteenUserID);
+            return View(orders);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,Name")] Categories categories)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,AvcolCanteenUserID,TotalPrice")] Orders orders)
         {
-            if (id != categories.CategoryID)
+            if (id != orders.OrderID)
             {
                 return NotFound();
             }
@@ -99,12 +102,12 @@ namespace AvcolCanteen.Controllers
             {
                 try
                 {
-                    _context.Update(categories);
+                    _context.Update(orders);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriesExists(categories.CategoryID))
+                    if (!OrdersExists(orders.OrderID))
                     {
                         return NotFound();
                     }
@@ -115,49 +118,51 @@ namespace AvcolCanteen.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(categories);
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id", orders.AvcolCanteenUserID);
+            return View(orders);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
-            var categories = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (categories == null)
+            var orders = await _context.Orders
+                .Include(o => o.AvcolCanteenUser)
+                .FirstOrDefaultAsync(m => m.OrderID == id);
+            if (orders == null)
             {
                 return NotFound();
             }
 
-            return View(categories);
+            return View(orders);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_context.Orders == null)
             {
-                return Problem("Entity set 'AvcolCanteenContext.Categories'  is null.");
+                return Problem("Entity set 'AvcolCanteenContext.Orders'  is null.");
             }
-            var categories = await _context.Categories.FindAsync(id);
-            if (categories != null)
+            var orders = await _context.Orders.FindAsync(id);
+            if (orders != null)
             {
-                _context.Categories.Remove(categories);
+                _context.Orders.Remove(orders);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriesExists(int id)
+        private bool OrdersExists(int id)
         {
-          return (_context.Categories?.Any(e => e.CategoryID == id)).GetValueOrDefault();
+          return (_context.Orders?.Any(e => e.OrderID == id)).GetValueOrDefault();
         }
     }
 }

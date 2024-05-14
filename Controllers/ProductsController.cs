@@ -22,9 +22,8 @@ namespace AvcolCanteen.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-              return _context.Products != null ? 
-                          View(await _context.Products.ToListAsync()) :
-                          Problem("Entity set 'AvcolCanteenContext.Products'  is null.");
+            var avcolCanteenContext = _context.Products.Include(p => p.Category);
+            return View(await avcolCanteenContext.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -36,6 +35,7 @@ namespace AvcolCanteen.Controllers
             }
 
             var products = await _context.Products
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.ProductID == id);
             if (products == null)
             {
@@ -48,6 +48,7 @@ namespace AvcolCanteen.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace AvcolCanteen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Name,Description,Price,SpecialPrice,Stock,Special")] Products products)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,Description,Price,SpecialPrice,CategoryID,Stock,Special")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +65,7 @@ namespace AvcolCanteen.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", products.CategoryID);
             return View(products);
         }
 
@@ -80,6 +82,7 @@ namespace AvcolCanteen.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", products.CategoryID);
             return View(products);
         }
 
@@ -88,7 +91,7 @@ namespace AvcolCanteen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Price,SpecialPrice,Stock,Special")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Price,SpecialPrice,CategoryID,Stock,Special")] Products products)
         {
             if (id != products.ProductID)
             {
@@ -115,6 +118,7 @@ namespace AvcolCanteen.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", products.CategoryID);
             return View(products);
         }
 
@@ -127,6 +131,7 @@ namespace AvcolCanteen.Controllers
             }
 
             var products = await _context.Products
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.ProductID == id);
             if (products == null)
             {
