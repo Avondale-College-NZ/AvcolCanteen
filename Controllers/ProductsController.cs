@@ -59,7 +59,7 @@ namespace AvcolCanteen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductID,Name,Description,Price,SpecialPrice,CategoryID,Stock,Special")] Products products)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(products);
                 await _context.SaveChangesAsync();
@@ -98,7 +98,7 @@ namespace AvcolCanteen.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

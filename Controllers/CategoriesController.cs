@@ -58,7 +58,7 @@ namespace AvcolCanteen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryID,Name")] Categories categories)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(categories);
                 await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace AvcolCanteen.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

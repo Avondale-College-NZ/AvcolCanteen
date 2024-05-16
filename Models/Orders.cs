@@ -14,7 +14,7 @@ namespace AvcolCanteen.Models
         [ForeignKey("AvcolCanteenUser") ]
         public string AvcolCanteenUserID { get; set; }
         public AvcolCanteenUser AvcolCanteenUser { get; set; }
-        public int TotalPrice {get; set; }
+        public int TotalPrice { get; set; }
         public ICollection<Cart> Cart { get; set; } = new List<Cart>();
 
     }

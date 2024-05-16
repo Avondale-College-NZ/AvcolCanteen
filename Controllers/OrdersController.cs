@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AvcolCanteen.Areas.Identity.Data;
 using AvcolCanteen.Models;
+using NuGet.Protocol.Core.Types;
 
 namespace AvcolCanteen.Controllers
 {
@@ -48,7 +49,7 @@ namespace AvcolCanteen.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -59,13 +60,13 @@ namespace AvcolCanteen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OrderID,AvcolCanteenUserID,TotalPrice")] Orders orders)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(orders);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id", orders.AvcolCanteenUserID);
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "UserName", orders.AvcolCanteenUserID);
             return View(orders);
         }
 
@@ -98,7 +99,7 @@ namespace AvcolCanteen.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
