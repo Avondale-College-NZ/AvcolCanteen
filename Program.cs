@@ -72,6 +72,7 @@ public class Program
                 user.FirstName = firstname;
                 user.LastName = lastname;
                 user.EmailConfirmed = true;
+                user.ChangePassword = true;
 
                 await userManager.CreateAsync(user, password);
 

@@ -15,6 +15,7 @@ public class AvcolCanteenUser : IdentityUser
     public string FirstName { get; set; }
     [Required] // requires user to fill in
     public string LastName { get; set; }
+    public bool ChangePassword { get; set; } = false;
 
     public ICollection<Orders> Orders { get; set; } = new List<Orders>();
 
