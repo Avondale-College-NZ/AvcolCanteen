@@ -31,4 +31,6 @@ public class AvcolCanteenContext : IdentityDbContext<AvcolCanteenUser>
 
     public DbSet<AvcolCanteen.Models.Payment> Payment { get; set; } = default!;
 
+    public DbSet<AvcolCanteen.Models.ImageModel> ImageModel { get; set; } = default!;
+
 }
