@@ -6,6 +6,9 @@ namespace AvcolCanteen.Models
     {
         [Key]
         public int CategoryID { get; set; }
+
+        [Required]
+        [Display(Name = "Category Name")]
         public string Name { get; set; }
         public ICollection<Products> Products { get; set; } = new List<Products>();
     }

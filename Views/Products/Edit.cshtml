@@ -19,11 +19,6 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
@@ -32,6 +27,11 @@
                 <label asp-for="SpecialPrice" class="control-label"></label>
                 <input asp-for="SpecialPrice" class="form-control" />
                 <span asp-validation-for="SpecialPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryID" class="control-label"></label>
@@ -52,6 +52,9 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <div>
+            <a asp-action="Delete" asp-route-id="@Model.ProductID">Delete</a>
+        </div>
     </div>
 </div>
 

@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AvcolCanteen.Areas.Identity.Data;
 using AvcolCanteen.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Hosting;
 
 namespace AvcolCanteen.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly AvcolCanteenContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ProductsController(AvcolCanteenContext context)
+        public ProductsController(AvcolCanteenContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: Products
@@ -48,7 +52,7 @@ namespace AvcolCanteen.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name");
             return View();
         }
 
@@ -57,15 +61,26 @@ namespace AvcolCanteen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Name,Description,Price,SpecialPrice,CategoryID,Stock,Special")] Products products)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,Price,SpecialPrice,CategoryID,Stock,Special,ImageFile,ImageName")] Products products)
         {
             if (!ModelState.IsValid)
             {
+                //Save image to wwroot/image
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(products.ImageFile.FileName);
+                string extension = Path.GetExtension(products.ImageFile.FileName);
+                products.ImageName = fileName = fileName + DateTime.Now.ToString("yyhhmm") + extension;
+                string path = Path.Combine(wwwRootPath + "/UploadedImg/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await products.ImageFile.CopyToAsync(fileStream);
+                }
+
                 _context.Add(products);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", products.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name", products.CategoryID);
             return View(products);
         }
 
@@ -82,7 +97,7 @@ namespace AvcolCanteen.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", products.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name", products.CategoryID);
             return View(products);
         }
 
@@ -91,7 +106,7 @@ namespace AvcolCanteen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Price,SpecialPrice,CategoryID,Stock,Special")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Price,SpecialPrice,CategoryID,Stock,Special,ImageFile,ImageName")] Products products)
         {
             if (id != products.ProductID)
             {
@@ -100,6 +115,16 @@ namespace AvcolCanteen.Controllers
 
             if (!ModelState.IsValid)
             {
+                //Save image to wwroot/image
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(products.ImageFile.FileName);
+                string extension = Path.GetExtension(products.ImageFile.FileName);
+                products.ImageName = fileName = fileName + DateTime.Now.ToString("yyhhmm") + extension;
+                string path = Path.Combine(wwwRootPath + "/UploadedImg/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await products.ImageFile.CopyToAsync(fileStream);
+                }
                 try
                 {
                     _context.Update(products);
@@ -146,6 +171,7 @@ namespace AvcolCanteen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            // Delete image from wwwroot/Images
             if (_context.Products == null)
             {
                 return Problem("Entity set 'AvcolCanteenContext.Products'  is null.");
@@ -155,7 +181,14 @@ namespace AvcolCanteen.Controllers
             {
                 _context.Products.Remove(products);
             }
-            
+            //delete image from wwroot/uploadedimg
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "UploadedImg", products.ImageName);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+            //delete the record
+            _context.Products.Remove(products);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

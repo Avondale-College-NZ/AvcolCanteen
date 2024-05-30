@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<AvcolCanteen.Models.Products>
 
 @{
-    ViewData["Title"] = "Menu";
+    ViewData["Title"] = "Index";
 }
 
+@* <h1>Index</h1>
 
-@* <table class="table">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -39,9 +40,6 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
@@ -64,36 +62,38 @@
         </tr>
 }
     </tbody>
-</table> *@
+</table>
+ *@
 <h1 class="heading">Menu</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <div class="container-fluid">
-	<div class="card">
-		<h1>Cart</h1>
-		<ul class="listCard">
-		</ul>
-		<div class="checkOut">
-			<div class="total">0</div>
-			<div class="closeShopping">Close</div>
-		</div>
-	</div>
+    <div class="card">
+        <h1>Cart</h1>
+        <ul class="listCard">
+        </ul>
+        <div class="checkOut">
+            <div class="total">0</div>
+            <div class="closeShopping">Close</div>
+        </div>
+    </div>
 </div>
-@foreach (var item in Model){
-<div class="all-products">
-	<div class="product">
-		<img src="~/Images/burger1.png">
-		<div class="product-info">
-			<h4 class="product-title">
+@foreach (var item in Model)
+{
+    <div class="all-products">
+        <div class="product">
+            <img src="@("~/UploadedImg/"+item.ImageName)" asp-append-version="true" style="max-height:150px; margin-top:50px;" />
+            <div class="product-info">
+                <h4 class="product-title">
                     @Html.DisplayFor(modelItem => item.Name)
                 </h4>
                 <p class="product-price">
                     @Html.DisplayFor(modelItem => item.Price)
                 </p>
-			<a class="product-btn" href="#">Buy Now</a>
+                <a class="product-btn" href="#">Buy Now</a>
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
             </div>
-	</div>
-</div>
+        </div>
+    </div>
 }
