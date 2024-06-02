@@ -9,37 +9,41 @@ namespace AvcolCanteen.Models
         [Key]
         public int ProductID { get; set; }
 
+        [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
         [Display(Name = "Product Name")]
-        [Required] // requires user to fill in 
+        [Required(ErrorMessage = "Product name is required.")]
         public string Name { get; set; }
 
-        [Required] // requires user to fill in 
-        [Range(0, 999, ErrorMessage = "Please enter a 6-digit number")] // limits the amount of data that can be entered
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Price is required.")]
+        [Range(0, 999, ErrorMessage = "Please enter a price between 0 and 999.")]
         public decimal Price { get; set; }
 
-        [Range(0, 999, ErrorMessage = "Please enter a 6-digit number")] // limits the amount of data that can be entered
         [Display(Name = "Special Price")]
+        [Range(0, 999, ErrorMessage = "Please enter a special price between 0 and 999.")]
         public decimal? SpecialPrice { get; set; }
 
         public string ImageName { get; set; }
 
-        [Required] // requires user to fill in 
+        [Required(ErrorMessage = "Product image is required.")]
         [NotMapped]
         [DisplayName("Upload Product Image")]
         public IFormFile ImageFile { get; set; }
 
         [DisplayName("Category")]
-        [Required] // requires user to fill in 
+        [Required(ErrorMessage = "Category ID is required.")]
         [ForeignKey("Category")]
         public int CategoryID { get; set; }
+
         public Categories Category { get; set; }
 
-        [Required] // requires user to fill in 
-        [Range(0, 999, ErrorMessage = "Please enter a 6-digit number")] // limits the amount of data that can be entered
+        [Required(ErrorMessage = "Stock amount is required.")]
+        [Range(0, 999, ErrorMessage = "Please enter a stock amount between 0 and 999.")]
         [Display(Name = "Stock Amount")]
         public int Stock { get; set; }
-        public bool Special { get; set; }
-        public ICollection<Cart> Cart { get; set; } = new List<Cart>();
 
+        public bool Special { get; set; }
+
+        public ICollection<Cart> Cart { get; set; } = new List<Cart>();
     }
 }

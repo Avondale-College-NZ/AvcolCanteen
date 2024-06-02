@@ -3,22 +3,32 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AvcolCanteen.Models
 {
+    public enum PaymentType
+    {
+        Cash,
+        CreditCard,
+        DebitCard,
+        Online
+    }
     public class Payment
     {
+        [Key]
         public int PaymentID { get; set; }
 
         [Required]
         [Display(Name = "Order ID")] // changes the display name to this
         [ForeignKey("Orders")]
         public int OrderID { get; set; }
+
         public Orders Orders { get; set; }
 
-        [Required] // requires user to fill in
-        [Display(Name = "Payment Date")] // changes the display name to this
+        [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Payment date is required.")]
+        [Display(Name = "Payment Date")]
         public DateTime PaymentDate { get; set; }
 
-        [Required]
-        [Display(Name = "Payment Type")] // changes the display name to this
-        public string PaymentType { get; set; }
+        [Required(ErrorMessage = "Payment type is required.")]
+        [Display(Name = "Payment Type")]
+        public PaymentType PaymentType { get; set; }
     }
 }

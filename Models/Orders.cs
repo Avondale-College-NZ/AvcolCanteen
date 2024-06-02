@@ -8,15 +8,17 @@ namespace AvcolCanteen.Models
     {
         [Key]
         public int OrderID { get; set; }
-        [Required]
-        [Display(Name ="User Email")]
-        [ForeignKey("AvcolCanteenUser") ]
+
+        [Required(ErrorMessage = "User email is required.")]
+        [Display(Name = "User Email")]
+        [ForeignKey("AvcolCanteenUser")]
         public string AvcolCanteenUserID { get; set; }
+
         public AvcolCanteenUser AvcolCanteenUser { get; set; }
 
-
+        [Required(ErrorMessage = "Total price is required.")]
         public int TotalPrice { get; set; }
-        public ICollection<Cart> Cart { get; set; } = new List<Cart>();
 
+        public ICollection<Cart> Cart { get; set; } = new List<Cart>();
     }
 }
