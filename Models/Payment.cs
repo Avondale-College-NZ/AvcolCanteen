@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AvcolCanteen.Models
@@ -6,7 +7,9 @@ namespace AvcolCanteen.Models
     public enum PaymentType
     {
         Cash,
+        [Display(Name = "Credit Card")] // changes the display name to this
         CreditCard,
+        [Display(Name = "Debit Card")] // changes the display name to this
         DebitCard,
         Online
     }
