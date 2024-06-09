@@ -4,6 +4,7 @@ using AvcolCanteen.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AvcolCanteen.Migrations
 {
     [DbContext(typeof(AvcolCanteenContext))]
-    partial class AvcolCanteenContextModelSnapshot : ModelSnapshot
+    [Migration("20240609234547_stringlength")]
+    partial class stringlength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,7 +125,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("Cart", (string)null);
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Categories", b =>
@@ -140,7 +143,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.ImageModel", b =>
@@ -161,7 +164,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasKey("ImageID");
 
-                    b.ToTable("ImageModel", (string)null);
+                    b.ToTable("ImageModel");
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Orders", b =>
@@ -183,7 +186,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("AvcolCanteenUserID");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Payment", b =>
@@ -207,7 +210,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Payment", (string)null);
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Products", b =>
@@ -246,7 +249,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

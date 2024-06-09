@@ -16,8 +16,15 @@ namespace AvcolCanteen.Models
 
         public AvcolCanteenUser AvcolCanteenUser { get; set; }
 
+        [Range(0, 999, ErrorMessage = "Please enter a total amount between 0 and 999.")]
+        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Total price is required.")]
         public int TotalPrice { get; set; }
+
+        //[DataType(DataType.DateTime)]
+        //[Required(ErrorMessage = "Order date is required.")]
+        //[Display(Name = "Order Date")]
+        //public DateTime Date { get; set; }
 
         public ICollection<Cart> Cart { get; set; } = new List<Cart>();
     }

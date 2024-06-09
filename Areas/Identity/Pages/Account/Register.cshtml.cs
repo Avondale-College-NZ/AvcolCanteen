@@ -72,12 +72,14 @@ namespace AvcolCanteen.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(255, ErrorMessage = "The first name field should have a maximum of 255 characters")]
+            [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
+            [StringLength(30, ErrorMessage = "The first name field should have a maximum of 30 characters")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(255, ErrorMessage = "The last name field should have a maximum of 255 characters")]
+            [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
+            [StringLength(30, ErrorMessage = "The last name field should have a maximum of 30 characters")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             /// <summary>

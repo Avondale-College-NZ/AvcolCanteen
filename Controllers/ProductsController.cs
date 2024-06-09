@@ -63,7 +63,7 @@ namespace AvcolCanteen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductID,Name,Price,SpecialPrice,CategoryID,Stock,Special,ImageFile,ImageName")] Products products)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //Save image to wwroot/image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -113,7 +113,7 @@ namespace AvcolCanteen.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //Save image to wwroot/image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
