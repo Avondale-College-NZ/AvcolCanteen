@@ -79,9 +79,10 @@
         </div>
     </div>
 </div>
+<div class="all-products">
+
 @foreach (var item in Model)
 {
-    <div class="all-products">
         <div class="product">
             <img src="@("~/UploadedImg/"+item.ImageName)" asp-append-version="true" style="max-height:150px; margin-top:50px;" />
             <div class="product-info">
@@ -95,5 +96,5 @@
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
             </div>
         </div>
-    </div>
 }
+</div>
