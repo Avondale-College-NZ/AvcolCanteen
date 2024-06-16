@@ -20,11 +20,22 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'AvcolCanteenContext.Categories'  is null.");
+            if (_context.Categories == null)
+            {
+                return Problem("Entity set 'AvcolCanteenContext.Categories' is null.");
+            }
+
+            var categories = from m in _context.Categories
+                             select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categories = categories.Where(s => s.Name!.Contains(searchString));
+            }
+
+            return View(await categories.ToListAsync());
         }
 
         // GET: Categories/Details/5
@@ -143,21 +154,21 @@ namespace AvcolCanteen.Controllers
         {
             if (_context.Categories == null)
             {
-                return Problem("Entity set 'AvcolCanteenContext.Categories'  is null.");
+                return Problem("Entity set 'AvcolCanteenContext.Categories' is null.");
             }
             var categories = await _context.Categories.FindAsync(id);
             if (categories != null)
             {
                 _context.Categories.Remove(categories);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CategoriesExists(int id)
         {
-          return (_context.Categories?.Any(e => e.CategoryID == id)).GetValueOrDefault();
+            return (_context.Categories?.Any(e => e.CategoryID == id)).GetValueOrDefault();
         }
     }
 }

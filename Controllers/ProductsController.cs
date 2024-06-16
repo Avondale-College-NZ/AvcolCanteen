@@ -24,10 +24,22 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var avcolCanteenContext = _context.Products.Include(p => p.Category);
-            return View(await avcolCanteenContext.ToListAsync());
+            if (_context.Products == null)
+            {
+                return Problem("Entity set 'AvcolCanteenContext.Products' is null.");
+            }
+
+            var products = from m in _context.Products
+                             select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name!.Contains(searchString));
+            }
+
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -63,7 +75,7 @@ namespace AvcolCanteen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductID,Name,Price,SpecialPrice,CategoryID,Stock,Special,ImageFile,ImageName")] Products products)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 //Save image to wwroot/image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -113,7 +125,7 @@ namespace AvcolCanteen.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 //Save image to wwroot/image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
