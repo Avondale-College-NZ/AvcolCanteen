@@ -52,12 +52,10 @@
      <div class="Search">
             <h2 style="font-size:30px; margin-left:55px;">View our Menu or search</h2>
         </div>
-    <div>
+    <form asp-controller="Products" asp-action="Index" method="get">
         <div class="searchcontainer">
-            <input type="search" placeholder="Search...">
+            <input type="search" name="searchString" placeholder="Search ..." value="@ViewData["CurrentFilter"]" />
             <div class="search"></div>
         </div>
-    </div>
+    </form>
 </div>
-
-

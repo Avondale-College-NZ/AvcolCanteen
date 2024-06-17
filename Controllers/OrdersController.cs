@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AvcolCanteen.Areas.Identity.Data;
 using AvcolCanteen.Models;
-using NuGet.Protocol.Core.Types;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace AvcolCanteen.Controllers
 {
@@ -58,9 +58,9 @@ namespace AvcolCanteen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,AvcolCanteenUserID,TotalPrice")] Orders orders)
+        public async Task<IActionResult> Create([Bind("OrderID,AvcolCanteenUserID,Date")] Orders orders)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(orders);
                 await _context.SaveChangesAsync();
@@ -92,14 +92,14 @@ namespace AvcolCanteen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,AvcolCanteenUserID,TotalPrice")] Orders orders)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,AvcolCanteenUserID,Date")] Orders orders)
         {
             if (id != orders.OrderID)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
