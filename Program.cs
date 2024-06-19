@@ -7,6 +7,12 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        // Add configuration sources
+        builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                             .AddEnvironmentVariables()
+                             .AddUserSecrets<Program>();
+
         var connectionString = builder.Configuration.GetConnectionString("AvcolCanteenContextConnection") ?? throw new InvalidOperationException("Connection string 'AvcolCanteenContextConnection' not found.");
 
         builder.Services.AddDbContext<AvcolCanteenContext>(options => options.UseSqlServer(connectionString));
@@ -58,13 +64,13 @@ public class Program
         {
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AvcolCanteenUser>>();
 
-            string firstname = "admin";
-            string lastname = "admin";
-            string email = "admin@admin.com";
-            string password = "Test_12345";
+            var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+            string firstname = configuration["AdminUser:FirstName"];
+            string lastname = configuration["AdminUser:LastName"];
+            string email = configuration["AdminUser:Email"];
+            string password = configuration["AdminUser:Password"];
 
-
-            if(await userManager.FindByEmailAsync(email) == null)
+            if (await userManager.FindByEmailAsync(email) == null)
             {
                 var user = new AvcolCanteenUser();
                 user.Email = email;
