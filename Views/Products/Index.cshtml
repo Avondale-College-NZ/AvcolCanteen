@@ -67,7 +67,7 @@
 <h1 class="heading">Menu</h1>
 <form asp-controller="Products" asp-action="Index" method="get">
     <div class="form-group">
-        <input type="text" name="searchString" class="form-control" placeholder="Search categories" value="@ViewData["CurrentFilter"]" />
+        <input type="text" name="searchString" class="form-control" placeholder="Search Menu" value="@ViewData["CurrentFilter"]" />
         <input type="submit" value="Search" class="btn btn-primary" />
     </div>
 </form>
@@ -87,8 +87,8 @@
 </div>
 <div class="all-products">
 
-@foreach (var item in Model)
-{
+    @foreach (var item in Model)
+    {
         <div class="product">
             <img src="@("~/UploadedImg/"+item.ImageName)" asp-append-version="true" style="max-height:150px; margin-top:50px;" />
             <div class="product-info">
@@ -102,5 +102,6 @@
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
             </div>
         </div>
-}
+    }
 </div>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>

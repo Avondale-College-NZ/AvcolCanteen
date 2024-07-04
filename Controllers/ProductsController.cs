@@ -24,8 +24,9 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
+            //Search fuctionality
             if (_context.Products == null)
             {
                 return Problem("Entity set 'AvcolCanteenContext.Products' is null.");
@@ -39,6 +40,18 @@ namespace AvcolCanteen.Controllers
                 products = products.Where(s => s.Name!.Contains(searchString));
             }
 
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder;
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+            }
             return View(await products.ToListAsync());
         }
 

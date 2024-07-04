@@ -9,8 +9,8 @@ namespace AvcolCanteen.Models
         [Key]
         public int ProductID { get; set; }
 
-        [StringLength(25, ErrorMessage = "Field must be less than 25 characters")] // limits the amount of data that can be entered
-        [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
+        [StringLength(30, ErrorMessage = "Field must be less than 30 characters")] // limits the amount of data that can be entered                                                                   
+        [RegularExpression(@"^[A-Z][a-z]*(\s[A-Z][a-z]*)*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
         [Display(Name = "Product Name")]
         [Required(ErrorMessage = "Product name is required.")]
         public string Name { get; set; }
