@@ -104,4 +104,28 @@
         </div>
     }
 </div>
+<span class="dropdown-el">
+    <input type="radio" name="sortType" value="Relevance" checked="checked" id="sort-relevance"><label for="sort-relevance">Relevance</label>
+    <input type="radio" name="sortType" value="Popularity" id="sort-best"><label for="sort-best">Product Popularity</label>
+    <input type="radio" name="sortType" value="PriceIncreasing" id="sort-low"><label for="sort-low">Price Low to High</label>
+    <input type="radio" name="sortType" value="PriceDecreasing" id="sort-high"><label for="sort-high">Price High to Low</label>
+    <input type="radio" name="sortType" value="ProductBrand" id="sort-brand"><label for="sort-brand">Product Brand</label>
+    <input type="radio" name="sortType" value="ProductName" id="sort-name"><label for="sort-name">Product Name</label>
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+</span>
+
+<div class="sort-buttons">
+    <button id="burgers" class="sort-btn">BURGERS</button>
+    <button id="wraps" class="sort-btn">WRAPS</button>
+    <button id="chicken-combos" class="sort-btn">CHICKEN COMBO PACK</button>
+    <button id="double-toasties" class="sort-btn">DOUBLE TOASTIES</button>
+    <button id="crunchy-bites" class="sort-btn">CRUNCHY BITES</button>
+    <button id="sides" class="sort-btn">SIDES</button>
+    <button id="rice" class="sort-btn">RICE</button>
+    <button id="beverages" class="sort-btn">BEVERAGES</button>
+    <button id="kids-meal" class="sort-btn">KIDS MEAL</button>
+    <button id="desserts" class="sort-btn">DESSERTS</button>
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"></a>
+</div>
+
 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>

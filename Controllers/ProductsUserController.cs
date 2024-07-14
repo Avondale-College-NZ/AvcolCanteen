@@ -10,104 +10,104 @@ using AvcolCanteen.Models;
 
 namespace AvcolCanteen.Controllers
 {
-    public class PaymentsController : Controller
+    public class ProductsUserController : Controller
     {
         private readonly AvcolCanteenContext _context;
 
-        public PaymentsController(AvcolCanteenContext context)
+        public ProductsUserController(AvcolCanteenContext context)
         {
             _context = context;
         }
 
-        // GET: Payments
+        // GET: ProductsUser
         public async Task<IActionResult> Index()
         {
-            var avcolCanteenContext = _context.Payment.Include(p => p.Orders);
+            var avcolCanteenContext = _context.Products.Include(p => p.Category);
             return View(await avcolCanteenContext.ToListAsync());
         }
 
-        // GET: Payments/Details/5
+        // GET: ProductsUser/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Payment == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var payment = await _context.Payment
-                .Include(p => p.Orders)
-                .FirstOrDefaultAsync(m => m.PaymentID == id);
-            if (payment == null)
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+            if (products == null)
             {
                 return NotFound();
             }
 
-            return View(payment);
+            return View(products);
         }
 
-        // GET: Payments/Create
+        // GET: ProductsUser/Create
         public IActionResult Create()
         {
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID");
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name");
             return View();
         }
 
-        // POST: Payments/Create
+        // POST: ProductsUser/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentID,OrderID,PaymentDate,PaymentType")] Payment payment)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,Price,SpecialPrice,ImageName,CategoryID,Stock,Special")] Products products)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _context.Add(payment);
+                _context.Add(products);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", payment.OrderID);
-            return View(payment);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name", products.CategoryID);
+            return View(products);
         }
 
-        // GET: Payments/Edit/5
+        // GET: ProductsUser/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Payment == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var payment = await _context.Payment.FindAsync(id);
-            if (payment == null)
+            var products = await _context.Products.FindAsync(id);
+            if (products == null)
             {
                 return NotFound();
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", payment.OrderID);
-            return View(payment);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name", products.CategoryID);
+            return View(products);
         }
 
-        // POST: Payments/Edit/5
+        // POST: ProductsUser/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentID,OrderID,PaymentDate,PaymentType")] Payment payment)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Price,SpecialPrice,ImageName,CategoryID,Stock,Special")] Products products)
         {
-            if (id != payment.PaymentID)
+            if (id != products.ProductID)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(payment);
+                    _context.Update(products);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PaymentExists(payment.PaymentID))
+                    if (!ProductsExists(products.ProductID))
                     {
                         return NotFound();
                     }
@@ -118,51 +118,51 @@ namespace AvcolCanteen.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderID", payment.OrderID);
-            return View(payment);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name", products.CategoryID);
+            return View(products);
         }
 
-        // GET: Payments/Delete/5
+        // GET: ProductsUser/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Payment == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var payment = await _context.Payment
-                .Include(p => p.Orders)
-                .FirstOrDefaultAsync(m => m.PaymentID == id);
-            if (payment == null)
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+            if (products == null)
             {
                 return NotFound();
             }
 
-            return View(payment);
+            return View(products);
         }
 
-        // POST: Payments/Delete/5
+        // POST: ProductsUser/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Payment == null)
+            if (_context.Products == null)
             {
-                return Problem("Entity set 'AvcolCanteenContext.Payment'  is null.");
+                return Problem("Entity set 'AvcolCanteenContext.Products'  is null.");
             }
-            var payment = await _context.Payment.FindAsync(id);
-            if (payment != null)
+            var products = await _context.Products.FindAsync(id);
+            if (products != null)
             {
-                _context.Payment.Remove(payment);
+                _context.Products.Remove(products);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PaymentExists(int id)
+        private bool ProductsExists(int id)
         {
-          return (_context.Payment?.Any(e => e.PaymentID == id)).GetValueOrDefault();
+          return (_context.Products?.Any(e => e.ProductID == id)).GetValueOrDefault();
         }
     }
 }

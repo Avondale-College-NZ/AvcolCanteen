@@ -17,11 +17,11 @@ namespace AvcolCanteen.Models
 
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Price is required.")]
-        [Range(0, 999, ErrorMessage = "Please enter a price between 0 and 999.")]
+        [Range(0.1, 999, ErrorMessage = "Please enter a price between 0.1 and 999.")]
         public decimal Price { get; set; }
 
         [Display(Name = "Special Price")]
-        [Range(0, 999, ErrorMessage = "Please enter a special price between 0 and 999.")]
+        [Range(0.1, 999, ErrorMessage = "Please enter a special price between 0.1 and 999.")]
         public decimal? SpecialPrice { get; set; }
 
         public string ImageName { get; set; }
