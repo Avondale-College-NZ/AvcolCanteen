@@ -50,7 +50,7 @@ namespace AvcolCanteen.Controllers
         public IActionResult Create()
         {
             ViewData["OrderID"] = new SelectList(_context.Set<Orders>(), "OrderID", "OrderID");
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID");
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace AvcolCanteen.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["OrderID"] = new SelectList(_context.Set<Orders>(), "OrderID", "OrderID", cart.OrderID);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID", cart.ProductID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", cart.ProductID);
             return View(cart);
         }
 
@@ -86,7 +86,7 @@ namespace AvcolCanteen.Controllers
                 return NotFound();
             }
             ViewData["OrderID"] = new SelectList(_context.Set<Orders>(), "OrderID", "OrderID", cart.OrderID);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID", cart.ProductID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", cart.ProductID);
             return View(cart);
         }
 
@@ -123,7 +123,7 @@ namespace AvcolCanteen.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["OrderID"] = new SelectList(_context.Set<Orders>(), "OrderID", "OrderID", cart.OrderID);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID", cart.ProductID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", cart.ProductID);
             return View(cart);
         }
 

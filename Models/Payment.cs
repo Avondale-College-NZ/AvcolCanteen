@@ -22,6 +22,7 @@ namespace AvcolCanteen.Models
         [Display(Name = "Order ID")] // changes the display name to this
         [ForeignKey("Orders")]
         public int OrderID { get; set; }
+        [Display(Name = "Order Number")] // changes the display name to this
 
         public Orders Orders { get; set; }
 

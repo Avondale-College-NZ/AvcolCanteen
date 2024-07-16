@@ -83,7 +83,7 @@ namespace AvcolCanteen.Controllers
             {
                 return NotFound();
             }
-            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "Id", orders.AvcolCanteenUserID);
+            ViewData["AvcolCanteenUserID"] = new SelectList(_context.Users, "Id", "UserName", orders.AvcolCanteenUserID);
             return View(orders);
         }
 
