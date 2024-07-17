@@ -70,6 +70,17 @@
         <input type="text" name="searchString" class="form-control" placeholder="Search Menu" value="@ViewData["CurrentFilter"]" />
         <input type="submit" value="Search" class="btn btn-primary" />
     </div>
+
+    <div class="form-group">
+        <label for="sortOrder">Sort by:</label>
+        <select name="sortOrder" id="sortOrder" class="form-control" onchange="this.form.submit()">
+            <option value="">-- Please Select --</option>
+            <option value="name_asc">Name Ascending</option>
+            <option value="name_desc">Name Descending</option>
+            <option value="price_asc">Price Low to High</option>
+            <option value="price_desc">Price High to Low</option>
+        </select>
+    </div>
 </form>
 <p>
     <a asp-action="Create">Create New</a>
@@ -104,15 +115,6 @@
         </div>
     }
 </div>
-<span class="dropdown-el">
-    <input type="radio" name="sortType" value="Relevance" checked="checked" id="sort-relevance"><label for="sort-relevance">Relevance</label>
-    <input type="radio" name="sortType" value="Popularity" id="sort-best"><label for="sort-best">Product Popularity</label>
-    <input type="radio" name="sortType" value="PriceIncreasing" id="sort-low"><label for="sort-low">Price Low to High</label>
-    <input type="radio" name="sortType" value="PriceDecreasing" id="sort-high"><label for="sort-high">Price High to Low</label>
-    <input type="radio" name="sortType" value="ProductBrand" id="sort-brand"><label for="sort-brand">Product Brand</label>
-    <input type="radio" name="sortType" value="ProductName" id="sort-name"><label for="sort-name">Product Name</label>
-    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
-</span>
 
 <div class="sort-buttons">
     <button id="burgers" class="sort-btn">BURGERS</button>
@@ -128,4 +130,5 @@
     <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"></a>
 </div>
 
-<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+@* <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+<a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Name)</a> *@

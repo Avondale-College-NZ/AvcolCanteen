@@ -26,34 +26,47 @@ namespace AvcolCanteen.Controllers
         // GET: Products
         public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
-            //Search fuctionality
+            // Search functionality (unchanged)
             if (_context.Products == null)
             {
                 return Problem("Entity set 'AvcolCanteenContext.Products' is null.");
             }
 
-            var products = from m in _context.Products
-                             select m;
+            var products = from m in _context.Products select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(s => s.Name!.Contains(searchString));
             }
 
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder;
+            // Set ViewData based on selected sort order (if any)
+            ViewData["NameSortParm"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
+            ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
 
+            // Sorting logic based on selected sort order
             switch (sortOrder)
             {
+                case "name_asc":
+                    products = products.OrderBy(s => s.Name);
+                    break;
                 case "name_desc":
                     products = products.OrderByDescending(s => s.Name);
                     break;
+                case "price_asc":
+                    products = products.OrderBy(s => s.Price);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
                 default:
+                    // Use default sorting (e.g., by name ascending)
                     products = products.OrderBy(s => s.Name);
                     break;
             }
+
             return View(await products.ToListAsync());
         }
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
