@@ -24,9 +24,8 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(string searchString, string sortOrder)
+        public async Task<IActionResult> Index(string searchString, string sortOrder, int pageNumber = 1, int pageSize = 10)
         {
-            // Search functionality (unchanged)
             if (_context.Products == null)
             {
                 return Problem("Entity set 'AvcolCanteenContext.Products' is null.");
@@ -39,11 +38,6 @@ namespace AvcolCanteen.Controllers
                 products = products.Where(s => s.Name!.Contains(searchString));
             }
 
-            // Set ViewData based on selected sort order (if any)
-            ViewData["NameSortParm"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
-            ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
-
-            // Sorting logic based on selected sort order
             switch (sortOrder)
             {
                 case "name_asc":
@@ -59,13 +53,27 @@ namespace AvcolCanteen.Controllers
                     products = products.OrderByDescending(s => s.Price);
                     break;
                 default:
-                    // Use default sorting (e.g., by name ascending)
                     products = products.OrderBy(s => s.Name);
                     break;
             }
 
-            return View(await products.ToListAsync());
+            // Get total product count and calculate total pages
+            var totalProducts = await products.CountAsync();
+            var totalPages = (int)Math.Ceiling((decimal)totalProducts / pageSize);
+
+            // Get the products for the current page
+            var productsPerPage = await products
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewData["CurrentPage"] = pageNumber;
+            ViewData["TotalPages"] = totalPages;
+            ViewData["PageSize"] = pageSize;
+
+            return View(productsPerPage);
         }
+
 
 
         // GET: Products/Details/5

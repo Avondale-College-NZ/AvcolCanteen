@@ -4,66 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-@* <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SpecialPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Special)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Special)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
- *@
 <h1 class="heading">Menu</h1>
 <form asp-controller="Products" asp-action="Index" method="get">
     <div class="form-group">
@@ -116,7 +56,7 @@
     }
 </div>
 
-<div class="sort-buttons">
+@* <div class="sort-buttons">
     <button id="burgers" class="sort-btn">BURGERS</button>
     <button id="wraps" class="sort-btn">WRAPS</button>
     <button id="chicken-combos" class="sort-btn">CHICKEN COMBO PACK</button>
@@ -129,6 +69,36 @@
     <button id="desserts" class="sort-btn">DESSERTS</button>
     <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"></a>
 </div>
+ *@
+@{
+    var currentPage = ViewData["CurrentPage"] as int? ?? 1;
+    var totalPages = ViewData["TotalPages"] as int? ?? 1;
+}
 
+<nav>
+    <ul class="pagination pg-dark justify-content-center">
+
+        <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+            <a class="page-link" href="?pageNumber=@(currentPage - 1)&sortOrder=@ViewData["CurrentSort"]&searchString=@ViewData["CurrentFilter"]" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" href="?pageNumber=@i&sortOrder=@ViewData["CurrentSort"]&searchString=@ViewData["CurrentFilter"]">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+            <a class="page-link" href="?pageNumber=@(currentPage + 1)&sortOrder=@ViewData["CurrentSort"]&searchString=@ViewData["CurrentFilter"]" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 @* <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
 <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Name)</a> *@
