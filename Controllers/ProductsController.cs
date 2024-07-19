@@ -9,6 +9,8 @@ using AvcolCanteen.Areas.Identity.Data;
 using AvcolCanteen.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
@@ -75,7 +77,42 @@ namespace AvcolCanteen.Controllers
         }
 
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddToCart(int productId)
+        {
+            //If user not signed in redirect not working
 
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Get the current user's ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Create a new order
+            var order = new Orders
+            {
+                AvcolCanteenUserID = userId,
+                Date = DateTime.Now
+            };
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            // Create cart records
+            var cartItem = new Cart
+            {
+                OrderID = order.OrderID,
+                ProductID = productId,
+                Quantity = 1,
+            };
+            _context.Cart.Add(cartItem);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -320,6 +320,7 @@ input[type='search']::placeholder {
     }
 
     .product a:link,
+    .product-btn,
     .product a:visited {
         color: #ececec;
         display: inline-block;
@@ -327,13 +328,15 @@ input[type='search']::placeholder {
         background-color: #E71D36;
         padding: 1.2rem 3rem;
         border-radius: 1rem;
+        border: none;
         margin-top: 1rem;
         font-size: 15px;
         transition: transform 0.2s;
-        margin-bottom:5px;
+        margin-bottom: 5px;
     }
 
-    .product a:hover {
+    .product a:hover,
+    .product-btn:hover {
         transform: scale(1.05);
     }
 @media screen and (max-width: 1540px) {
