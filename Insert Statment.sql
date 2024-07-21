@@ -26,3 +26,4 @@ INSERT INTO Products ( Name, Price, SpecialPrice, ImageName, CategoryID, Stock, 
 INSERT INTO Products ( Name, Price, SpecialPrice, ImageName, CategoryID, Stock, Special) VALUES ( 'Salad', 3.50, NULL, 'salad.png', 3, 70, 0);
 INSERT INTO Products ( Name, Price, SpecialPrice, ImageName, CategoryID, Stock, Special) VALUES ( 'Brownie', 1.75, NULL, 'brownie.png', 4, 110, 0);
 
+-- Create 4 users and create 4 Orders with those users then run the second insert statement
