@@ -21,7 +21,7 @@ namespace AvcolCanteen.Models
 
         public Products Product { get; set; }
 
-        [Range(0, 999, ErrorMessage = "Please enter a total amount between 0 and 999.")]
+        [Range(1, 999, ErrorMessage = "Please enter a total amount between 0 and 999.")]
         [Required(ErrorMessage = "Quantity is required.")]
         public int Quantity { get; set; }
     }

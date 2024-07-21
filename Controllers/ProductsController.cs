@@ -32,14 +32,14 @@ namespace AvcolCanteen.Controllers
             {
                 return Problem("Entity set 'AvcolCanteenContext.Products' is null.");
             }
-
+            // Search products by name
             var products = from m in _context.Products select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(s => s.Name!.Contains(searchString));
             }
-
+            // Sort functionality
             switch (sortOrder)
             {
                 case "name_asc":
@@ -81,7 +81,7 @@ namespace AvcolCanteen.Controllers
         [Authorize]
         public async Task<IActionResult> AddToCart(int productId)
         {
-            //If user not signed in redirect not working
+            // If user not signed in; redirect not working
 
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
@@ -113,6 +113,7 @@ namespace AvcolCanteen.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
