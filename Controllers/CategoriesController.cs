@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AvcolCanteen.Areas.Identity.Data;
 using AvcolCanteen.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly AvcolCanteenContext _context;

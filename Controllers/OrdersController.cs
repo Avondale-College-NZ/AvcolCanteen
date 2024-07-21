@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using AvcolCanteen.Areas.Identity.Data;
 using AvcolCanteen.Models;
 using static NuGet.Packaging.PackagingConstants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class OrdersController : Controller
     {
         private readonly AvcolCanteenContext _context;
