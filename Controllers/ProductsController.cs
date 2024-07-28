@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly AvcolCanteenContext _context;

@@ -41,14 +41,14 @@
 </div>
 <div class="containerHome">
     <div class="MenuButton">
-        <a href="@Url.Action("Index", "Products")">
+        <a href="@Url.Action("Menu", "ProductsUser")">
             <img class="glow" src="~/Images/menu.jpg" alt="MenuImage">
         </a>
     </div>
      <div class="Search">
             <h2 style="font-size:30px; margin-left:55px;">View our Menu or search</h2>
         </div>
-    <form asp-controller="Products" asp-action="Index" method="get">
+    <form asp-controller="ProductsUser" asp-action="Menu" method="get">
         <div class="searchcontainer">
             <input type="search" name="searchString" placeholder="Search ..." value="@ViewData["CurrentFilter"]" />
             <div class="search"></div>
