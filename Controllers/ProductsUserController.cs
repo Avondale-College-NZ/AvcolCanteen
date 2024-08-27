@@ -79,7 +79,7 @@ namespace AvcolCanteen.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> AddToCart(int productId)
+        public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
             // If user not signed in; redirect not working
 
@@ -106,12 +106,12 @@ namespace AvcolCanteen.Controllers
             {
                 OrderID = order.OrderID,
                 ProductID = productId,
-                Quantity = 1,
+                Quantity = quantity,
             };
             _context.Cart.Add(cartItem);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Menu));
         }
 
         private bool ProductsUserExists(int id)

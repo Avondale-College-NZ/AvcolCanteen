@@ -46,13 +46,24 @@
                 <p class="product-price">
                     @Html.DisplayFor(modelItem => item.Price)
                 </p>
-                <form asp-controller="ProductsUser" asp-action="AddToCart" method="post">
-                    <input type="hidden" name="productId" value="@item.ProductID" />
-                    <input type="submit" class="product-btn" value="Buy Now" />
-                </form>
+                <button type="button" class="product-btn" onclick="showPopup(@item.ProductID)">Buy Now</button>
             </div>
         </div>
     }
+</div>
+
+@* Popup Modal *@
+<div id="quantityPopup" style="display:none;">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Select Quantity</h2>
+        <form id="quantityForm" asp-controller="ProductsUser" asp-action="AddToCart" method="post">
+            <input type="hidden" name="productId" id="productId" value="" />
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" />
+            <input type="submit" value="Add to Cart" />
+        </form>
+    </div>
 </div>
 
 @* <div class="sort-buttons">

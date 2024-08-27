@@ -74,3 +74,15 @@ buyButtons.forEach(button => {
         });
     });
 });
+
+function showPopup(productId) {
+    // Set the value of the hidden input field with the product ID
+    document.getElementById('productId').value = productId;
+    // Display the popup by changing its style from 'none' to 'block'
+    document.getElementById('quantityPopup').style.display = 'block';
+}
+
+function closePopup() {
+    // Hide the popup by setting its display style to 'none'
+    document.getElementById('quantityPopup').style.display = 'none';
+}

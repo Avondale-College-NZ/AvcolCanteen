@@ -122,7 +122,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("Cart");
+                    b.ToTable("Cart", (string)null);
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Categories", b =>
@@ -140,7 +140,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Orders", b =>
@@ -162,7 +162,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("AvcolCanteenUserID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Payment", b =>
@@ -186,7 +186,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payment", (string)null);
                 });
 
             modelBuilder.Entity("AvcolCanteen.Models.Products", b =>
@@ -225,7 +225,7 @@ namespace AvcolCanteen.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
