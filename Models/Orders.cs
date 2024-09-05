@@ -20,6 +20,8 @@ namespace AvcolCanteen.Models
         [Required(ErrorMessage = "Order date is required.")]
         [Display(Name = "Order Date")]
         public DateTime Date { get; set; }
+        public bool IsCompleted { get; set; }
+
 
         public ICollection<Cart> Cart { get; set; } = new List<Cart>();
     }

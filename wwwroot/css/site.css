@@ -381,7 +381,7 @@ header .shopping span {
     color: #fff;
     position: absolute;
     top: -5px;
-    left: 80%;
+    left: 55%;
     padding: 3px 10px;
 }
 header .shopping img {
@@ -511,31 +511,61 @@ header .shopping {
     .sort-btn:hover {
         background-color: #e0e0e0;
     }
+/* Fullscreen overlay for the popup */
 #quantityPopup {
     position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 9999;
 }
 
+/* Centered popup content */
 .popup-content {
     background-color: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
     position: relative;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
+    /* Close button */
+    .popup-content .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #555;
+    }
+
+    /* Input styles */
+    .popup-content input[type="number"] {
+        padding: 8px;
+        margin-top: 10px;
+        font-size: 16px;
+        width: 80px;
+        border-radius: 5px;
+    }
+
+    /* Submit button styles */
+    .popup-content input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+        .popup-content input[type="submit"]:hover {
+            background-color: #0056b3;
+        }

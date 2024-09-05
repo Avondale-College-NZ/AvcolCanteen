@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AvcolCanteen.Models.Cart>
+
+<h2>Your Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@string.Format("${0:0.00}", item.Product.Price)</td>
+                    <td>@string.Format("${0:0.00}", item.Quantity * item.Product.Price)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <strong>Total:</strong> @string.Format("${0:0.00}", Model.Sum(i => i.Quantity * i.Product.Price))
+    </div>
+
+    <form asp-action="Checkout" method="post">
+        <button type="submit" class="btn btn-primary">Confirm Order</button>
+    </form>
+}

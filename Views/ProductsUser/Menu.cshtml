@@ -51,6 +51,10 @@
         </div>
     }
 </div>
+@* Code needed for cart icon js *@
+<input type="hidden" id="cartItemCount" value="@ViewData["CartItemCount"]" />
+
+
 
 @* Popup Modal *@
 <div id="quantityPopup" style="display:none;">
@@ -66,20 +70,6 @@
     </div>
 </div>
 
-@* <div class="sort-buttons">
-    <button id="burgers" class="sort-btn">BURGERS</button>
-    <button id="wraps" class="sort-btn">WRAPS</button>
-    <button id="chicken-combos" class="sort-btn">CHICKEN COMBO PACK</button>
-    <button id="double-toasties" class="sort-btn">DOUBLE TOASTIES</button>
-    <button id="crunchy-bites" class="sort-btn">CRUNCHY BITES</button>
-    <button id="sides" class="sort-btn">SIDES</button>
-    <button id="rice" class="sort-btn">RICE</button>
-    <button id="beverages" class="sort-btn">BEVERAGES</button>
-    <button id="kids-meal" class="sort-btn">KIDS MEAL</button>
-    <button id="desserts" class="sort-btn">DESSERTS</button>
-    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"></a>
-</div>
- *@
 @{
     var currentPage = ViewData["CurrentPage"] as int? ?? 1;
     var totalPages = ViewData["TotalPages"] as int? ?? 1;

@@ -28,6 +28,26 @@ namespace AvcolCanteen.Controllers
         // GET: ProductsUser
         public async Task<IActionResult> Menu(string searchString, string sortOrder, int pageNumber = 1, int pageSize = 10)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Calculate cart item count
+            int cartItemCount = 0;
+            if (userId != null)
+            {
+                var order = await _context.Orders
+                    .Where(o => o.AvcolCanteenUserID == userId && !o.IsCompleted)
+                    .FirstOrDefaultAsync();
+
+                if (order != null)
+                {
+                    cartItemCount = await _context.Cart
+                        .Where(c => c.OrderID == order.OrderID)
+                        .SumAsync(c => c.Quantity);
+                }
+            }
+
+            ViewData["CartItemCount"] = cartItemCount;
+
             if (_context.Products == null)
             {
                 return Problem("Entity set 'AvcolCanteenContext.ProductsUser' is null.");
@@ -92,14 +112,23 @@ namespace AvcolCanteen.Controllers
             // Get the current user's ID
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Create a new order
-            var order = new Orders
+            // Check if there's an existing open order for the user
+            var order = await _context.Orders
+                .Where(o => o.AvcolCanteenUserID == userId && !o.IsCompleted)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
             {
-                AvcolCanteenUserID = userId,
-                Date = DateTime.Now
-            };
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+                // Create a new order if none exists
+                order = new Orders
+                {
+                    AvcolCanteenUserID = userId,
+                    Date = DateTime.Now,
+                    IsCompleted = false
+                };
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+            }
 
             // Create cart records
             var cartItem = new Cart
@@ -112,6 +141,51 @@ namespace AvcolCanteen.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Menu));
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Cart()
+        {
+            // Get the current user's ID
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var order = await _context.Orders
+                .Where(o => o.AvcolCanteenUserID == userId && !o.IsCompleted)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                return View(new List<Cart>());
+            }
+
+            // Get all cart items for this order
+            var cartItems = await _context.Cart
+                .Include(c => c.Product)
+                .Where(c => c.OrderID == order.OrderID)
+                .ToListAsync();
+
+            return View(cartItems);
+        
+        }
+
+        public async Task<IActionResult> Checkout()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var order = await _context.Orders
+                .Where(o => o.AvcolCanteenUserID == userId && !o.IsCompleted)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                return NotFound("No active order found for the user.");
+            }
+
+            order.IsCompleted = true;
+            await _context.SaveChangesAsync();
+
+            return View("OrderConfirmation", order);
         }
 
         private bool ProductsUserExists(int id)
