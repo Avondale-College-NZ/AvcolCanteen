@@ -49,10 +49,7 @@
                 <p class="product-price">
                     @Html.DisplayFor(modelItem => item.Price)
                 </p>
-                <form asp-controller="Products" asp-action="AddToCart" method="post">
-                    <input type="hidden" name="productId" value="@item.ProductID" />
-                    <input type="submit" class="product-btn" value="Buy Now" />
-                </form>
+
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a>
             </div>
         </div>

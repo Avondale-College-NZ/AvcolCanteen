@@ -169,7 +169,9 @@ namespace AvcolCanteen.Controllers
         
         }
 
-        public async Task<IActionResult> Checkout()
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Checkout(PaymentType paymentType)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -182,11 +184,40 @@ namespace AvcolCanteen.Controllers
                 return NotFound("No active order found for the user.");
             }
 
+            // Create and save the payment record
+            var payment = new Payment
+            {
+                OrderID = order.OrderID,
+                PaymentDate = DateTime.Now,
+                PaymentType = paymentType
+            };
+
+            _context.Payment.Add(payment);
+            await _context.SaveChangesAsync();
+
+            // Mark the order as completed
             order.IsCompleted = true;
             await _context.SaveChangesAsync();
 
             return View("OrderConfirmation", order);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCart(int cartItemId)
+        {
+            var cartItem = await _context.Cart.FindAsync(cartItemId);
+
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.Cart.Remove(cartItem);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Cart));
+        }
+
 
         private bool ProductsUserExists(int id)
         {

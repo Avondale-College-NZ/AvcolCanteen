@@ -15,6 +15,7 @@ else
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Total</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,12 @@ else
                     <td>@item.Quantity</td>
                     <td>@string.Format("${0:0.00}", item.Product.Price)</td>
                     <td>@string.Format("${0:0.00}", item.Quantity * item.Product.Price)</td>
+                    <td>
+                        <form asp-action="RemoveFromCart" method="post" style="display:inline;">
+                            <input type="hidden" name="cartItemId" value="@item.CartID" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -35,6 +42,13 @@ else
     </div>
 
     <form asp-action="Checkout" method="post">
+        <label for="paymentType">Payment Type:</label>
+        <select id="paymentType" name="paymentType" style="width: 150px; height: 30px;">
+            <option value="Cash">Cash</option>
+            <option value="CreditCard">Credit Card</option>
+            <option value="DebitCard">Debit Card</option>
+            <option value="Online">Online</option>
+        </select>
         <button type="submit" class="btn btn-primary">Confirm Order</button>
     </form>
 }
