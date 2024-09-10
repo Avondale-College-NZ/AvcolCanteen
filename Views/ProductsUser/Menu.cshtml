@@ -57,14 +57,14 @@
 
 
 @* Popup Modal *@
-<div id="quantityPopup" style="display:none;">
+<div id="quantityPopup">
     <div class="popup-content">
         <span class="close" onclick="closePopup()">&times;</span>
         <h2>Select Quantity</h2>
         <form id="quantityForm" asp-controller="ProductsUser" asp-action="AddToCart" method="post">
             <input type="hidden" name="productId" id="productId" value="" />
             <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1" />
+            <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" />
             <input type="submit" value="Add to Cart" />
         </form>
     </div>
