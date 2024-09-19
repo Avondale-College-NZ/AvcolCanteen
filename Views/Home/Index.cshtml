@@ -55,25 +55,3 @@
         </div>
     </form>
 </div>
-
-@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class-"row">
-        <div class="form-group col-md-4">
-            <input type="email" class="form-control" name="toEmail" />
-        </div>
-        <div class="form-group col-md-2">
-            <input type="file" class="form-control" name="fileToAttach" />
-        </div>
-        <div class="form-group col-md-6">
-            <input type="submit" value="Send Email" class="btn btn-success" />
-        </div>
-
-    </div>
-}
-@if (ViewBag.emailsentmessage != null)
-{
-    <div class="bg-success">
-        <label>@ViewBag.emailsentmessage</label>
-    </div>
-}

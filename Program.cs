@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AvcolCanteen.Areas.Identity.Data;
+using AvcolCanteen.RazorPage.Services;
+using AvcolCanteen.RazorPage.Settings;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SendGrid.Extensions.DependencyInjection;
 
 public class Program
 {
@@ -23,6 +27,13 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGridSettings"));
+
+        builder.Services.AddSendGrid(options => {
+            options.ApiKey = builder.Configuration.GetSection("SendGridSettings").GetValue<string>("ApiKey");
+        });
+
+        builder.Services.AddScoped<IEmailSender, EmailSenderService>();
 
         var app = builder.Build();
 

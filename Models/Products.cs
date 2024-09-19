@@ -19,7 +19,7 @@ namespace AvcolCanteen.Models
         [Required(ErrorMessage = "Price is required.")]
         [Range(0.5, 50, ErrorMessage = "Please enter a price between 0.5 and 50.")]
         public decimal Price { get; set; }
-
+       
         [Display(Name = "Special Price")]
         [Range(0.5, 50, ErrorMessage = "Please enter a special price between 0.5 and 50.")]
         public decimal? SpecialPrice { get; set; }

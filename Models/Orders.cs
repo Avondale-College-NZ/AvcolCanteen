@@ -1,4 +1,5 @@
 ﻿using AvcolCanteen.Areas.Identity.Data;
+using AvcolCanteen.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,7 @@ namespace AvcolCanteen.Models
 
         public AvcolCanteenUser AvcolCanteenUser { get; set; }
 
+        [DateValidator(ErrorMessage = "Enter a valid date")]
         [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Order date is required.")]
         [Display(Name = "Order Date")]

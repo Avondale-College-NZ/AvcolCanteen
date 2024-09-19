@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using AvcolCanteen.ValidationAttributes;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -26,6 +27,7 @@ namespace AvcolCanteen.Models
 
         public Orders Orders { get; set; }
 
+        [DateValidator(ErrorMessage = "Enter a valid date")]
         [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Payment date is required.")]
         [Display(Name = "Payment Date")]
