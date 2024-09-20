@@ -1,9 +1,4 @@
-﻿@* 
- *@
- @page
-@model AvcolCanteen.Views.Home.ContactModel
-
-<div class="container">
+﻿<div class="container">
     <div class="row">
         <div class="col-md-6">
             <h1 class="display-4">Contact</h1>
@@ -16,7 +11,8 @@
         </div>
         <div class="col-md-6" style="padding-top:5px;">
             <h3>Send Us a Message</h3>
-            <form>
+            <form action="https://formspree.io/f/manwgqkl"
+                  method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
