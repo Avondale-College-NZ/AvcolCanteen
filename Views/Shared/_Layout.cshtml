@@ -4,7 +4,7 @@
 @inject SignInManager<AvcolCanteenUser> SignInManager
 @inject UserManager<AvcolCanteenUser> UserManager
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%; margin: 0; padding: 0;">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AvcolCanteen.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/Images/favicon.ico">
 </head>
-<body>
+<body style="display: flex; flex-direction: column;">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container-fluid">
@@ -39,7 +40,7 @@
                         </li>
                         @if (User.IsInRole("Admin"))  // Only if the role of admin is logged in they can only see and access these properties
                         {
-                            <li class ="nav-item" style="margin-left:5px;">
+                            <li class="nav-item" style="margin-left:5px;">
                                 <div class="nav-item dropdown" style="margin-right:20px">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Admin Controls
@@ -59,29 +60,30 @@
                             </li>
                         }
                     </ul>
-                    </div>
-                    <div style="color:white; margin-right:20px">
-                     @if (SignInManager.IsSignedIn(User)) {
+                </div>
+                <div style="color:white; margin-right:20px">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
                         <p1>Hello @UserManager.GetUserName(User) </p1>
-                     }
-                    </div>
-                 
+                    }
+                </div>
+
                 <div class="shopping">
                     <a class="navbar-brand" href="@Url.Action("Cart", "ProductsUser")">
                         <img src="/Images/shopping.svg">
                     </a>
                     <span class="quantity">0</span>
                 </div>
-                    <div class="nav-item dropdown" style="margin-right:20px">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="~/Images/profilepic.png" alt="ProfilePic" style="width:50px; margin-left:40px;">
-                        </a>
-                        <div class="dropdown-menu" style="max-width:100%; text-align:center; " aria-labelledby="navbarDropdown">
-                            <a <partial name="_LoginPartial" /></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("Privacy", "Home" )">Privacy</a>
-                        </div>
-                    </div>   
+                <div class="nav-item dropdown" style="margin-right:20px">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="~/Images/profilepic.png" alt="ProfilePic" style="width:50px; margin-left:40px;">
+                    </a>
+                    <div class="dropdown-menu" style="max-width:100%; text-align:center; " aria-labelledby="navbarDropdown">
+                        <a <partial name="_LoginPartial" /></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Privacy", "Home" )">Privacy</a>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -91,11 +93,46 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*     <footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2024 - AvcolCanteen - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    </footer> *@
+    <footer class="site-footer">
         <div class="container">
-            &copy; 2024 - AvcolCanteen - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">
+                       The Avondale College Canteen is dedicated to providing healthy and delicious meals for students and staff.
+                    </p>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links2">
+                        <li><a asp-area="Identity" asp-page="/Account/Manage/Index">Account</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-md-3 text-center contact-us-btn">
+                    <a class="btn btn-primary" href="@Url.Action("Contact", "Home")">Contact Us</a>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">
+                        &copy; 2024 - AvcolCanteen
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
