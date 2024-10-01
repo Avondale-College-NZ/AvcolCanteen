@@ -576,7 +576,7 @@ header .shopping {
     font-size: 15px;
     line-height: 24px;
     color: #737373;
-    position: relative;
+    position: absolute;
     bottom: 0;
     width: 100%;
     margin-top:50px;
@@ -609,52 +609,21 @@ header .shopping {
             text-decoration: none;
         }
 
-.footer-links {
-    padding-left: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px 30px;
-}
 
-    .footer-links li {
-        margin: 0;
-    }
 
-    .footer-links a {
-        color: #737373;
-        text-decoration: none;
-    }
-
-        .footer-links a:active,
-        .footer-links a:focus,
-        .footer-links a:hover {
-            text-decoration: none;
-        }
-
-.footer-links2 {
-    padding-left: 0;
-    list-style: none;
-    text-decoration: none;
-    grid-template-columns: repeat(2, auto);
-    text-align: center;
-}
-
-    .footer-links2 li a {
-        text-decoration: none;
-    }
 
 .contact-us-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -15px;
-    margin-left: -5px;
+    margin-top: -10px;
+    margin-bottom: -5px;
+    margin-left: -15px;
 }
 
     .contact-us-btn .btn {
-        font-size: 18px;
-        padding: 12px 30px;
+        font-size: 14px;
+        padding: 8px 20px;
         background-color: #015391;
         color: #fff;
         border-radius: 5px;
@@ -676,19 +645,6 @@ header .shopping {
     }
 }
 
-.site-footer .social-icons {
-    text-align: right
-}
-
-    .site-footer .social-icons a {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        margin-left: 6px;
-        margin-right: 0;
-        border-radius: 100%;
-        background-color: #33353d
-    }
 
 .copyright-text {
     margin: 0
@@ -710,65 +666,6 @@ header .shopping {
         }
 }
 
-.social-icons {
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none
-}
-
-    .social-icons li {
-        display: inline-block;
-        margin-bottom: 4px
-    }
-
-        .social-icons li.title {
-            margin-right: 15px;
-            text-transform: uppercase;
-            color: #96a2b2;
-            font-weight: 700;
-            font-size: 13px
-        }
-
-    .social-icons a {
-        background-color: #eceeef;
-        color: #818a91;
-        font-size: 16px;
-        display: inline-block;
-        line-height: 44px;
-        width: 44px;
-        height: 44px;
-        text-align: center;
-        margin-right: 8px;
-        border-radius: 100%;
-        -webkit-transition: all .2s linear;
-        -o-transition: all .2s linear;
-        transition: all .2s linear
-    }
-
-        .social-icons a:active, .social-icons a:focus, .social-icons a:hover {
-            color: #fff;
-            background-color: #29aafe
-        }
-
-    .social-icons.size-sm a {
-        line-height: 34px;
-        height: 34px;
-        width: 34px;
-        font-size: 14px
-    }
-
-    .social-icons a.facebook:hover {
-        background-color: #3b5998
-    }
-
-    .social-icons a.twitter:hover {
-        background-color: #00aced
-    }
-
-    .social-icons a.instagram:hover {
-        background-color: #ea4c89
-    }
-
 @media (max-width:767px) {
     .social-icons li.title {
         display: block;
@@ -777,4 +674,60 @@ header .shopping {
     }
 }
 
+
+
+.sign-in-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+    .sign-in-form input {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+        .sign-in-form input:focus {
+            border-color: #258cfb;
+            outline: none;
+        }
+
+    .sign-in-form button {
+        background-color: royalblue;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .sign-in-form button:hover {
+            background-color: #014070;
+        }
+
+.btn-link-style {
+    display: inline-block;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: royalblue;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+}
+
+    .btn-link-style:hover {
+        background-color: #258cfb;
+        color: white;
+    }
 

@@ -7,10 +7,10 @@
 
 <h1 style="padding-top:20px;">@ViewData["Title"]</h1>
 <div class="container-md" style="justify-content:center; display:flex;">
-    <div class="col-md-4">
+    <div class="col-md-4 sign-in-form">
         <section>
             <form id="account" method="post">
-                <h2>Use a school account to log in.</h2>
+                <h2>Use a school account to log in</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
@@ -33,20 +33,19 @@
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
                 <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
+                    <a class="btn btn-link-style" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </div>
+                <div>
+                    <a class="btn btn-link-style" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                </div>
+                <div>
+                    <a class="btn btn-link-style" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                 </div>
             </form>
         </section>
     </div>
 </div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
