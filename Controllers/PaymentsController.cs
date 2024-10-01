@@ -22,10 +22,27 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Payments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var avcolCanteenContext = _context.Payment.Include(p => p.Orders);
-            return View(await avcolCanteenContext.ToListAsync());
+            // Start by selecting all payments and including related orders
+            var payments = _context.Payment.Include(p => p.Orders).AsQueryable();
+
+            // Fetch the data from the database
+            var paymentList = await payments.ToListAsync();
+
+            // Normalize the search string by removing spaces
+            var normalizedSearchString = string.IsNullOrWhiteSpace(searchString) ? string.Empty : searchString.Replace(" ", string.Empty).ToLower();
+
+            // Apply the search filter for PaymentType on the client side
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                paymentList = paymentList
+                    .Where(p => p.PaymentType.ToString().Replace(" ", string.Empty).ToLower().Contains(normalizedSearchString))
+                    .ToList();
+            }
+
+            // Pass the filtered list to the view
+            return View(paymentList);
         }
 
         // GET: Payments/Details/5

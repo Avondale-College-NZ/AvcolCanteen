@@ -15,6 +15,7 @@ namespace AvcolCanteen.Models
         [ForeignKey("AvcolCanteenUser")]
         public string AvcolCanteenUserID { get; set; }
 
+        [Display(Name = "User Email")]
         public AvcolCanteenUser AvcolCanteenUser { get; set; }
 
         [DateValidator(ErrorMessage = "Enter a valid date")]

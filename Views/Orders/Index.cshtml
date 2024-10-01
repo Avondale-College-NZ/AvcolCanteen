@@ -5,10 +5,15 @@
 }
 
 <h1>Orders</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form asp-controller="Orders" asp-action="Index" method="get" class="d-flex" style="margin-top:20px;">
+        <div class="form-group mb-0">
+            <input type="text" name="searchString" class="form-control searchbar" placeholder="Search User Email" value="@ViewData["CurrentFilter"]" />
+        </div>
+        <input type="submit" value="Search" class="btn btn-primary ms-2" />
+    </form>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -31,9 +36,9 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.OrderID" class="btn btn-warning btn-sm custom-warning-btn">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.OrderID" class="btn btn-info btn-sm custom-info-btn">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.OrderID" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
 }

@@ -5,15 +5,18 @@
 }
 
 <h1>Categories</h1>
-<form asp-controller="Categories" asp-action="Index" method="get">
-    <div class="form-group">
-        <input type="text" name="searchString" class="form-control" placeholder="Search Categories" value="@ViewData["CurrentFilter"]" />
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </div>
-</form>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form asp-controller="Categories" asp-action="Index" method="get" class="d-flex" style="margin-top:20px;">
+        <div class="form-group mb-0">
+            <input type="text" name="searchString" class="form-control searchbar" placeholder="Search Category Name" value="@ViewData["CurrentFilter"]" />
+        </div>
+        <input type="submit" value="Search" class="btn btn-primary ms-2" />
+    </form>
+
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -24,17 +27,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CategoryID" class="btn btn-warning btn-sm custom-warning-btn">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.CategoryID" class="btn btn-info btn-sm custom-info-btn">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.CategoryID" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

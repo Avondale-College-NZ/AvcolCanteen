@@ -731,3 +731,29 @@ header .shopping {
         color: white;
     }
 
+.searchbar {
+    width: 250px; 
+    border-radius: 5px;
+}
+
+.custom-warning-btn {
+    background-color: #e58900; 
+    border-color: #cf7b00; 
+    color: white;
+}
+
+    .custom-warning-btn:hover {
+        background-color: #cf7b00; 
+        border-color: #b96e00;
+    }
+
+.custom-info-btn {
+    background-color: #0a58ca; /* Darker blue */
+    border-color: #084298; /* Darker blue border */
+    color: white;
+}
+
+    .custom-info-btn:hover {
+        background-color: #084298; /* Darker on hover */
+        border-color: #062c7a;
+    }

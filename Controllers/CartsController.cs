@@ -22,10 +22,17 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Carts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var avcolCanteenContext = _context.Cart.Include(c => c.Orders).Include(c => c.Product);
-            return View(await avcolCanteenContext.ToListAsync());
+            //Search functionality
+            var cart = _context.Cart.Include(c => c.Orders).Include(c => c.Product).AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                cart = cart.Where(s => s.Product.Name.Contains(searchString));
+            }
+
+            return View(await cart.ToListAsync());
         }
 
         // GET: Carts/Details/5

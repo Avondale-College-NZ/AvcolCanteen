@@ -8,7 +8,7 @@
 <form asp-controller="ProductsUser" asp-action="Menu" method="get">
     <div class="form-group">
         <input type="text" name="searchString" class="form-control" placeholder="Search Menu" value="@ViewData["CurrentFilter"]" />
-        <input type="submit" value="Search" class="btn btn-primary" />
+        <input type="submit" value="Search" class="btn btn-primary" style="margin-top:10px;" />
     </div>
 
     <div class="form-group">
@@ -51,7 +51,7 @@
         </div>
     }
 </div>
-@* Code needed for cart icon js *@
+@* Code needed for cart icon *@
 <input type="hidden" id="cartItemCount" value="@ViewData["CartItemCount"]" />
 
 

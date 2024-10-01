@@ -52,9 +52,7 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
-        <div>
-            <a asp-action="Delete" asp-route-id="@Model.ProductID">Delete</a>
-        </div>
+        <a asp-action="Delete" asp-route-id="@Model.ProductID" class="btn btn-danger btn-md" style="margin-top:10px;">Delete</a>
     </div>
 </div>
 

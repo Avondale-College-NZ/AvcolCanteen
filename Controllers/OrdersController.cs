@@ -24,10 +24,19 @@ namespace AvcolCanteen.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var avcolCanteenContext = _context.Orders.Include(o => o.AvcolCanteenUser);
-            return View(await avcolCanteenContext.ToListAsync());
+            // Start by selecting all orders
+            var orders = _context.Orders.Include(o => o.AvcolCanteenUser).AsQueryable();
+
+            // Apply search filter if searchString is provided
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(o => o.AvcolCanteenUser.UserName.Contains(searchString));
+            }
+
+            // Pass the filtered list to the view
+            return View(await orders.ToListAsync());
         }
 
         // GET: Orders/Details/5
