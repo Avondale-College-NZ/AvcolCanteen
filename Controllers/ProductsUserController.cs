@@ -28,6 +28,7 @@ namespace AvcolCanteen.Controllers
         // GET: ProductsUser
         public async Task<IActionResult> Menu(string searchString, string sortOrder, int pageNumber = 1, int pageSize = 10)
         {
+            // Retrieve the current user's ID from claims
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // Calculate cart item count
@@ -83,7 +84,7 @@ namespace AvcolCanteen.Controllers
             var totalProductsUser = await Products.CountAsync();
             var totalPages = (int)Math.Ceiling((decimal)totalProductsUser / pageSize);
 
-            // Get the ProductsUser for the current page
+            // Get the Products for the current page
             var ProductsUserPerPage = await Products
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -98,7 +99,7 @@ namespace AvcolCanteen.Controllers
 
 
         [HttpPost]
-        [Authorize]
+        [Authorize] // Requires user to be authenticated
         public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
             // If user not signed in; redirect not working
@@ -144,7 +145,7 @@ namespace AvcolCanteen.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize] // Requires user to be authenticated
         public async Task<IActionResult> Cart()
         {
             // Get the current user's ID
@@ -170,11 +171,13 @@ namespace AvcolCanteen.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize] // Requires user to be authenticated
         public async Task<IActionResult> Checkout(PaymentType paymentType)
         {
+            // Get the current user's ID
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            // Retrieve the open order for the user
             var order = await _context.Orders
                 .Where(o => o.AvcolCanteenUserID == userId && !o.IsCompleted)
                 .FirstOrDefaultAsync();
@@ -203,8 +206,10 @@ namespace AvcolCanteen.Controllers
         }
 
         [HttpPost]
+        [Authorize] // Requires user to be authenticated
         public async Task<IActionResult> RemoveFromCart(int cartItemId)
         {
+            // Find the cart item based on its ID
             var cartItem = await _context.Cart.FindAsync(cartItemId);
 
             if (cartItem == null)

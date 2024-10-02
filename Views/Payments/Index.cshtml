@@ -5,6 +5,7 @@
 }
 
 <h1>Payments</h1>
+<!-- Search bar -->
 <div class="d-flex justify-content-between align-items-center mb-3">
     <form asp-controller="Payments" asp-action="Index" method="get" class="d-flex" style="margin-top:20px;">
         <div class="form-group mb-0">
@@ -12,6 +13,8 @@
         </div>
         <input type="submit" value="Search" class="btn btn-primary ms-2" />
     </form>
+
+    <!-- 'Create New' button to add a new payment record -->
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </div>
 <table class="table">
@@ -42,8 +45,11 @@
                 @Html.DisplayFor(modelItem => item.PaymentType)
             </td>
             <td>
+                    <!-- Edit button -->
                     <a asp-action="Edit" asp-route-id="@item.PaymentID" class="btn btn-warning btn-sm custom-warning-btn">Edit</a>
+                    <!-- Details button -->
                     <a asp-action="Details" asp-route-id="@item.PaymentID" class="btn btn-info btn-sm custom-info-btn">Details</a>
+                    <!-- Delete button -->
                     <a asp-action="Delete" asp-route-id="@item.PaymentID" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>

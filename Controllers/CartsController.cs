@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")] // Requires user to be in role of admin
     public class CartsController : Controller
     {
         private readonly AvcolCanteenContext _context;
@@ -27,6 +27,7 @@ namespace AvcolCanteen.Controllers
             //Search functionality
             var cart = _context.Cart.Include(c => c.Orders).Include(c => c.Product).AsQueryable();
 
+            // If there is a search query, filter the Cart data by matching the Product's Name.
             if (!String.IsNullOrEmpty(searchString))
             {
                 cart = cart.Where(s => s.Product.Name.Contains(searchString));

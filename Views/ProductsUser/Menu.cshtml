@@ -5,12 +5,17 @@
 }
 
 <h1 class="heading">Menu</h1>
+
+<!-- Search and Sort Form -->
 <form asp-controller="ProductsUser" asp-action="Menu" method="get">
     <div class="form-group">
+        <!-- Search Input -->
         <input type="text" name="searchString" class="form-control" placeholder="Search Menu" value="@ViewData["CurrentFilter"]" />
-        <input type="submit" value="Search" class="btn btn-primary" style="margin-top:10px;" />
+        <!-- Submit Button -->
+        <input type="submit" value="Search" class="btn btn-primary" style="margin-top:10px;" /> 
     </div>
 
+    <!-- Sort Dropdown -->
     <div class="form-group">
         <label for="sortOrder">Sort by:</label>
         <select name="sortOrder" id="sortOrder" class="form-control" onchange="this.form.submit()">
@@ -22,41 +27,37 @@
         </select>
     </div>
 </form>
-<div class="container-fluid">
-    <div class="card">
-        <h1>Cart</h1>
-        <ul class="listCard">
-        </ul>
-        <div class="checkOut">
-            <div class="total">0</div>
-            <div class="closeShopping">Close</div>
-        </div>
-    </div>
-</div>
-<div class="all-products">
 
+<div class="all-products">
+    <!-- Each record will be displayed with these properties -->
     @foreach (var item in Model)
     {
+        <!-- Individual product block -->
         <div class="product">
+            <!-- Product image -->
             <img src="@("~/UploadedImg/"+item.ImageName)" asp-append-version="true" style="max-height:150px; margin-top:50px;" />
             <div class="product-info">
+                <!-- Product name -->
                 <h4 class="product-title">
                     @Html.DisplayFor(modelItem => item.Name)
                 </h4>
+                <!-- Product price -->
                 <p class="product-price">
                     @Html.DisplayFor(modelItem => item.Price)
                 </p>
+                <!-- Buy Now button which shows quantity popup -->
                 <button type="button" class="product-btn" onclick="showPopup(@item.ProductID)">Buy Now</button>
             </div>
         </div>
     }
 </div>
-@* Code needed for cart icon *@
+
+<!-- Code needed for cart icon -->
 <input type="hidden" id="cartItemCount" value="@ViewData["CartItemCount"]" />
 
 
 
-@* Popup Modal *@
+<!-- Popup Modal for selecting quantity -->
 <div id="quantityPopup">
     <div class="popup-content">
         <span class="close" onclick="closePopup()">&times;</span>
@@ -70,28 +71,29 @@
     </div>
 </div>
 
+<!-- Pagination -->
 @{
     var currentPage = ViewData["CurrentPage"] as int? ?? 1;
     var totalPages = ViewData["TotalPages"] as int? ?? 1;
 }
-
+<!-- Pagination Links -->
 <nav>
     <ul class="pagination pg-dark justify-content-center" style="margin-top:50px;">
-
+        <!-- Previous Page Button -->
         <li class="page-item @(currentPage == 1 ? "disabled" : "")">
             <a class="page-link" href="?pageNumber=@(currentPage - 1)&sortOrder=@ViewData["CurrentSort"]&searchString=@ViewData["CurrentFilter"]" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
-
+        <!-- Page Numbers -->
         @for (int i = 1; i <= totalPages; i++)
         {
             <li class="page-item @(i == currentPage ? "active" : "")">
                 <a class="page-link" href="?pageNumber=@i&sortOrder=@ViewData["CurrentSort"]&searchString=@ViewData["CurrentFilter"]">@i</a>
             </li>
         }
-
+        <!-- Next Page Button -->
         <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
             <a class="page-link" href="?pageNumber=@(currentPage + 1)&sortOrder=@ViewData["CurrentSort"]&searchString=@ViewData["CurrentFilter"]" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -100,5 +102,3 @@
         </li>
     </ul>
 </nav>
-@* <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
-<a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Name)</a> *@

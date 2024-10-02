@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")] // Requires user to be in role of admin
     public class CategoriesController : Controller
     {
         private readonly AvcolCanteenContext _context;
@@ -24,19 +24,21 @@ namespace AvcolCanteen.Controllers
         // GET: Categories
         public async Task<IActionResult> Index(string searchString)
         {
+            //Search Functionality
             if (_context.Categories == null)
             {
                 return Problem("Entity set 'AvcolCanteenContext.Categories' is null.");
             }
-
+            // Select all categories from the database
             var categories = from m in _context.Categories
                              select m;
 
+            // If a search string is provided, filter the categories based on the name
             if (!String.IsNullOrEmpty(searchString))
             {
                 categories = categories.Where(s => s.Name!.Contains(searchString));
             }
-
+            // Return the view with the filtered or full list of categories
             return View(await categories.ToListAsync());
         }
 

@@ -19,15 +19,11 @@ namespace AvcolCanteen.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy() // Direct user to privacy page
         {
             return View();
         }
-        public IActionResult Contact()
-        {
-            return View();
-        }
-        public IActionResult Menupage()
+        public IActionResult Contact() // Direct user to Contact us page
         {
             return View();
         }

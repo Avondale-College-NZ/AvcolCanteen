@@ -1,7 +1,7 @@
 ﻿<div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="display-4">Contact</h1>
+            <h1 class="display-4">Contact</h1>          <!-- Information about the canteen -->
             <p>Feel free to reach out to us for any inquiries or feedback!</p>
             <ul>
                 <li><strong>Email:</strong> Canteen@avcol.school.nz</li>
@@ -11,8 +11,10 @@
         </div>
         <div class="col-md-6" style="padding-top:5px;">
             <h3>Send Us a Message</h3>
+
+            <!-- Form for sending a message to admin -->
             <form action="https://formspree.io/f/manwgqkl"
-                  method="POST">
+                  method="POST"> <!-- Send form to this API to redirect to admin -->
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
@@ -30,7 +32,7 @@
                     <label for="message">Message</label>
                     <textarea class="form-control" id="message" rows="5" name="message"></textarea>
                 </div>
-                <button type="submit" style="margin-top:20px;" class="btn btn-primary">Submit</button>
+                <button type="submit" style="margin-top:20px;" class="btn btn-primary">Submit</button> <!-- Submit button -->
             </form>
         </div>
     </div>

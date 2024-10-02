@@ -2,30 +2,35 @@
 
 <h2>Your Cart</h2>
 
+<!-- Check if the cart is empty -->
 @if (!Model.Any())
 {
     <p>Your cart is empty.</p>
 }
 else
 {
+    <!-- Table displaying cart items if present -->
     <table class="table">
         <thead>
             <tr>
+                <!-- Table headers for product details -->
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Total</th>
-                <th></th>
+                <th></th> <!-- Empty column for the remove button -->
             </tr>
         </thead>
         <tbody>
+            <!-- Each record will be displayed with these properties -->
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Product.Name</td>
-                    <td>@item.Quantity</td>
-                    <td>@string.Format("${0:0.00}", item.Product.Price)</td>
-                    <td>@string.Format("${0:0.00}", item.Quantity * item.Product.Price)</td>
+                    <td>@item.Product.Name</td> <!-- Display product name -->
+                    <td>@item.Quantity</td> <!-- Display quantity of the product -->
+                    <td>@string.Format("${0:0.00}", item.Product.Price)</td> <!-- Display the price of the product, formatted as currency -->
+                    <td>@string.Format("${0:0.00}", item.Quantity * item.Product.Price)</td> <!-- Display the total price (quantity multiplied by price), formatted as currency -->
+                    <!-- Remove from cart button -->
                     <td>
                         <form asp-action="RemoveFromCart" method="post" style="display:inline;">
                             <input type="hidden" name="cartItemId" value="@item.CartID" />
@@ -37,11 +42,14 @@ else
         </tbody>
     </table>
 
+    <!-- Display total cost of all items in the cart -->
     <div>
         <strong>Total:</strong> @string.Format("${0:0.00}", Model.Sum(i => i.Quantity * i.Product.Price))
     </div>
 
+    <!-- Checkout Form -->
     <form asp-action="Checkout" method="post">
+        <!-- Payment type selection dropdown -->
         <label for="paymentType">Payment Type:</label>
         <select id="paymentType" name="paymentType" style="width: 150px; height: 30px;">
             <option value="Cash">Cash</option>

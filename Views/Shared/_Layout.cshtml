@@ -29,22 +29,27 @@
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Home link with active state management -->
                         <li class="nav-item" style="margin-left:5px;">
                             <a class="nav-link material-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <!-- Menu link -->
                         <li class="nav-item" style="margin-left:5px;">
                             <a class="nav-link material-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Menu" ? "active" : "")" asp-area="" asp-controller="ProductsUser" asp-action="Menu">Menu</a>
                         </li>
+                        <!-- Contact link -->
                         <li class="nav-item" style="margin-left:5px;">
                             <a class="nav-link material-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Contact" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
-                        @if (User.IsInRole("Admin"))  // Only if the role of admin is logged in they can only see and access these properties
+                        <!-- Admin Controls dropdown (visible only if logged-in user is an Admin) -->
+                        @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item" style="margin-left:5px;">
                                 <div class="nav-item dropdown" style="margin-right:20px">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Admin Controls
                                     </a>
+                                    <!-- Dropdown options for admin-specific controls -->
                                     <div class="dropdown-menu" style="max-width:100%; text-align:center; " aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="@Url.Action("Index", "Categories" )">Categories</a>
                                         <div class="dropdown-divider"></div>
@@ -67,13 +72,14 @@
                         <p1>Hello @UserManager.GetUserName(User) </p1>
                     }
                 </div>
-
+                <!-- Shopping cart icon with product quantity -->
                 <div class="shopping">
                     <a class="navbar-brand" href="@Url.Action("Cart", "ProductsUser")">
                         <img src="/Images/shopping.svg">
                     </a>
                     <span class="quantity">0</span>
                 </div>
+                <!-- Dropdown menu with links -->
                 <div class="nav-item dropdown" style="margin-right:20px">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="~/Images/profilepic.png" alt="ProfilePic" style="width:50px; margin-left:40px;">
@@ -92,7 +98,7 @@
             @RenderBody()
         </main>
     </div>
-
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="row">
@@ -102,6 +108,7 @@
                         <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </p>
                 </div>
+                <!-- Contact Us button -->
                 <div class="col-xs-6 col-md-3 text-center contact-us-btn">
                     <a class="btn btn-primary" href="@Url.Action("Contact", "Home")">Contact Us</a>
                 </div>

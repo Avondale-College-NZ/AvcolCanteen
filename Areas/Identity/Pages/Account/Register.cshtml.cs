@@ -71,34 +71,34 @@ namespace AvcolCanteen.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
+            [Required] // Field is required to be filled
             [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
-            [StringLength(30, ErrorMessage = "The first name field should have a maximum of 30 characters")]
-            [Display(Name = "First Name")]
+            [StringLength(30, ErrorMessage = "The first name field should have a maximum of 30 characters")] // Limits the amount of data that can be entered  
+            [Display(Name = "First Name")] // Display Name of field
             public string FirstName { get; set; }
 
-            [Required]
+            [Required] // Field is required to be filled
             [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
-            [StringLength(30, ErrorMessage = "The last name field should have a maximum of 30 characters")]
-            [Display(Name = "Last Name")]
+            [StringLength(30, ErrorMessage = "The last name field should have a maximum of 30 characters")] // Limits the amount of data that can be entered  
+            [Display(Name = "Last Name")] // Display Name of field
             public string LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required] // Field is required to be filled
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Email")] // Display Name of field
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required] // Field is required to be filled
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)] // Limits the amount of data that can be entered  
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Password")] // Display Name of field
             public string Password { get; set; }
 
             /// <summary>
@@ -106,7 +106,7 @@ namespace AvcolCanteen.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirm password")] // Display Name of field
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -136,7 +136,7 @@ namespace AvcolCanteen.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, "Member");
+                    await _userManager.AddToRoleAsync(user, "Member"); //Assign role of member to new user
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

@@ -6,6 +6,7 @@
 
 <h1>Categories</h1>
 
+<!-- Search bar -->
 <div class="d-flex justify-content-between align-items-center mb-3">
     <form asp-controller="Categories" asp-action="Index" method="get" class="d-flex" style="margin-top:20px;">
         <div class="form-group mb-0">
@@ -13,7 +14,7 @@
         </div>
         <input type="submit" value="Search" class="btn btn-primary ms-2" />
     </form>
-
+    <!-- Button to create a new category -->
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </div>
 
@@ -34,8 +35,11 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
+                    <!-- Edit button -->
                     <a asp-action="Edit" asp-route-id="@item.CategoryID" class="btn btn-warning btn-sm custom-warning-btn">Edit</a>
+                    <!-- Details button -->
                     <a asp-action="Details" asp-route-id="@item.CategoryID" class="btn btn-info btn-sm custom-info-btn">Details</a>
+                    <!-- Delete button -->
                     <a asp-action="Delete" asp-route-id="@item.CategoryID" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>

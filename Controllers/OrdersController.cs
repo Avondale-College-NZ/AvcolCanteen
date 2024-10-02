@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")] // Requires user to be in role of admin
 
     public class OrdersController : Controller
     {
@@ -26,6 +26,8 @@ namespace AvcolCanteen.Controllers
         // GET: Orders
         public async Task<IActionResult> Index(string searchString)
         {
+            // Search Functionality
+
             // Start by selecting all orders
             var orders = _context.Orders.Include(o => o.AvcolCanteenUser).AsQueryable();
 

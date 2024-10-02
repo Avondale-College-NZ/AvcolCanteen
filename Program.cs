@@ -27,6 +27,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        //SendGrid Services which allow it to work
         builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGridSettings"));
 
         builder.Services.AddSendGrid(options => {
@@ -62,7 +63,7 @@ public class Program
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var roles = new[] { "Admin", "Manager", "Member" };
+            var roles = new[] { "Admin", "Manager", "Member" }; //Different roles that can be assigned
 
             foreach (var role in roles)
             {
@@ -76,6 +77,7 @@ public class Program
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AvcolCanteenUser>>();
 
             var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+            //User secrets hide the login information for the user
             string firstname = configuration["AdminUser:FirstName"];
             string lastname = configuration["AdminUser:LastName"];
             string email = configuration["AdminUser:Email"];
@@ -83,6 +85,7 @@ public class Program
 
             if (await userManager.FindByEmailAsync(email) == null)
             {
+                //Create a new user in the role of admin
                 var user = new AvcolCanteenUser();
                 user.Email = email;
                 user.UserName = email;

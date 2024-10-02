@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")] // Requires user to be in role of admin
     public class PaymentsController : Controller
     {
         private readonly AvcolCanteenContext _context;
@@ -24,6 +24,7 @@ namespace AvcolCanteen.Controllers
         // GET: Payments
         public async Task<IActionResult> Index(string searchString)
         {
+            // Search Functionality
             // Start by selecting all payments and including related orders
             var payments = _context.Payment.Include(p => p.Orders).AsQueryable();
 

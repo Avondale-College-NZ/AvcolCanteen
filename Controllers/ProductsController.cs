@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AvcolCanteen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")] // Requires user to be in role of admin
     public class ProductsController : Controller
     {
         private readonly AvcolCanteenContext _context;
@@ -79,7 +79,7 @@ namespace AvcolCanteen.Controllers
 
 
         [HttpPost]
-        [Authorize]
+        [Authorize] // Requires user to be in role of admin
         public async Task<IActionResult> AddToCart(int productId)
         {
             // If user not signed in; redirect not working
@@ -200,16 +200,6 @@ namespace AvcolCanteen.Controllers
 
             if (!ModelState.IsValid)
             {
-                //Save image to wwroot/image
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(products.ImageFile.FileName);
-                string extension = Path.GetExtension(products.ImageFile.FileName);
-                products.ImageName = fileName = fileName + DateTime.Now.ToString("yyhhmm") + extension;
-                string path = Path.Combine(wwwRootPath + "/UploadedImg/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    await products.ImageFile.CopyToAsync(fileStream);
-                }
                 try
                 {
                     _context.Update(products);
@@ -266,7 +256,7 @@ namespace AvcolCanteen.Controllers
             {
                 _context.Products.Remove(products);
             }
-            //delete image from wwroot/uploadedimg
+            // Delete image from wwroot/uploadedimg
             var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "UploadedImg", products.ImageName);
             if (System.IO.File.Exists(imagePath))
             {

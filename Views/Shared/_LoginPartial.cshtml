@@ -7,6 +7,7 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        <!-- If the user is signed in, show 'Account' and 'Logout' options -->
         <li class="LogRegButton">
             <a id="manage" class="nav-link" style="color: #107ac7; word-wrap: break-word " asp-area="Identity" asp-page="/Account/Manage/Index">Account</a>
         </li>
@@ -19,6 +20,7 @@
     }
     else
     {
+                <!-- If the user is not signed in, show 'Register' and 'Login' options -->
         <li class="LogRegButton">
             <a class="nav-link" style="color: #107ac7" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>

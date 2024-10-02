@@ -4,9 +4,11 @@
 
 <div class="container text-center" style="padding-top:5px;">
 
+    <!-- Carousel for displaying images -->
 
     <div id="carousel" class="carousel slide mx-auto" data-bs-ride="carousel" style="max-width: 1500px;-moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;">
+        <!-- Carousel indicators for navigation -->
 
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
@@ -14,7 +16,7 @@
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"></button>
         </div>
 
-
+        <!-- Carousel items containing images -->
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="~/Images/Artboard 1 new.png" alt="Food" class="d-block mx-auto" style="max-width: 100%; height: auto;  -moz-border-radius: 10px 10px 10px 10px;
@@ -30,7 +32,7 @@
             </div>
         </div>
 
-
+        <!-- Navigation buttons for the carousel -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
@@ -39,6 +41,8 @@
         </button>
     </div>
 </div>
+
+<!-- Section for menu button -->
 <div class="containerHome">
     <div class="MenuButton">
         <a href="@Url.Action("Menu", "ProductsUser")">
@@ -48,6 +52,8 @@
     <div class="Search">
         <h2 style="font-size:30px; margin-left:55px;">View our Menu or search</h2>
     </div>
+
+    <!-- Search functionality -->
     <form asp-controller="ProductsUser" asp-action="Menu" method="get">
         <div class="searchcontainer">
             <input type="search" name="searchString" placeholder="Search ..." value="@ViewData["CurrentFilter"]" />
