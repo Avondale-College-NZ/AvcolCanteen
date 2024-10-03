@@ -1,4 +1,6 @@
-﻿-- Insert Categories
+﻿-- Insert statement which inserts all dummy data in the database
+
+-- Insert Categories
 INSERT INTO Categories ( Name) VALUES ( 'Beverages');
 INSERT INTO Categories ( Name) VALUES ( 'Snacks');
 INSERT INTO Categories ( Name) VALUES ( 'Lunch');
