@@ -19,7 +19,6 @@ public class AvcolCanteenUser : IdentityUser
     [RegularExpression("^[A-Z][a-zA-Z]*$", ErrorMessage = "The first letter must be capitalised and only letters are allowed")] // defines a specific way of entering data
     [Required] // requires user to fill in
     public string LastName { get; set; }
-    public bool ChangePassword { get; set; } = false;
 
     public ICollection<Orders> Orders { get; set; } = new List<Orders>();
 
